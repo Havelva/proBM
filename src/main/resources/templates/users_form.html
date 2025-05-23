@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+    <nav th:replace="layout :: nav"></nav>
+    <div class="container mt-4" th:fragment="content">
+        <h1 th:text="${user.id != null ? 'Edit User' : 'Add User'}" class="text-center mb-4"></h1>
+        <form method="post" th:action="@{/users/save}" th:object="${user}" class="col-md-6 offset-md-3">
+            <input type="hidden" th:field="*{id}">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" th:field="*{username}" required>
+            </div>
+            <div class="mb-3" th:if="${user.id == null}"> <!-- Only show password field for new users -->
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" th:field="*{password}" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Save User</button>
+        </form>
+    </div>
+</body>
+</html>

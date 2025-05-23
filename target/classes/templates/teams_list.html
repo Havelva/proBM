@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout :: head"></head>
+
+<body>
+<nav th:replace="layout :: nav"></nav>
+
+<div th:fragment="content" class="p-5">
+    <h1 class="text-center">Teams</h1> <!-- Changed title from Vaření to Teams -->
+    <a class="btn btn-primary mb-3" th:href="@{/teams/new}">New Team</a> <!-- Changed button text and link -->
+    <ul class="list-group">
+        <li class="list-group-item" th:each="team: ${teams}"> <!-- Changed iteration variable and list name -->
+            <a th:href="@{'/teams/' + ${team.id}}" th:text="${team.name}"></a> <!-- Changed link and text variable -->
+        </li>
+    </ul>
+</div>
+</body>
+</html>

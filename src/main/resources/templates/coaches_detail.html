@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: nav"></nav>
+    <div class="p-5">
+        <h1 th:text="${'Coach: ' + coach.name}"></h1> <!-- Changed BOS to Coach, bos.name to coach.name -->
+        <h5 th:text="${'ID: ' + coach.id}"></h5> <!-- Changed bos.id to coach.id -->
+        <h5 th:text="${'Experience Years: ' + coach.experienceYears}"></h5> <!-- Added Experience Years -->
+
+        <a th:href="@{'/coaches/' + ${coach.id} + '/edit'}">Edit Coach</a> <!-- Changed /bos/ to /coaches/, BOS to Coach -->
+        <a th:href="@{'/coaches/' + ${coach.id} + '/delete'}">Delete Coach</a> <!-- Changed /bos/ to /coaches/, BOS to Coach -->
+    </div>
+</body>
+</html>

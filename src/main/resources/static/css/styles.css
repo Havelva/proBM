@@ -1,0 +1,104 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6; /* Lighter, softer background */
+    color: #333; /* Default text color */
+}
+
+/* Navbar styling */
+.navbar-dark .navbar-brand {
+    font-weight: bold;
+    color: #ffffff; /* Ensure brand is white on dark background */
+}
+
+.navbar-dark .nav-link {
+    color: rgba(255, 255, 255, 0.75); /* Lighter nav links for dark navbar */
+}
+
+.navbar-dark .nav-link:hover, .navbar-dark .nav-link:focus {
+    color: #ffffff;
+}
+
+/* General container and card styling */
+.container, .container-fluid {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0; /* Softer border for cards */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+}
+
+.card-header {
+    background-color: #343a40; /* Dark header for cards */
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.card-footer {
+    background-color: #f8f9fa; /* Light footer */
+}
+
+/* Button styling to complement Bootstrap */
+.btn-primary {
+    background-color: #007bff; /* Standard Bootstrap primary */
+    border-color: #007bff;
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Standard Bootstrap secondary */
+    border-color: #6c757d;
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Standard Bootstrap danger */
+    border-color: #dc3545;
+}
+
+.btn-outline-light {
+    border-color: #f8f9fa;
+    color: #f8f9fa;
+}
+
+.btn-outline-light:hover {
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+/* Form styling */
+.form-label {
+    font-weight: bold;
+}
+
+/* Table styling */
+.table {
+    margin-bottom: 20px;
+    background-color: #ffffff; /* Ensure tables are on white background */
+}
+
+.table thead th {
+    background-color: #e9ecef; /* Light grey for table headers */
+    color: #495057;
+    border-bottom-width: 2px;
+}
+
+/* Responsive adjustments if needed */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+}
+
+/* Specific overrides from previous CSS that might still be useful or need integration */
+h1.text-center {
+    /* text-align: center; */ /* Already handled by Bootstrap class */
+    margin-top: 20px;
+    color: #343a40;
+}
+
+/* .btn is too generic, rely on Bootstrap classes like .btn-primary, .btn-secondary etc. */
+
+/* .list-group styling is generally handled well by Bootstrap, specific overrides can be added if needed */

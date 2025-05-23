@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout :: head"></head>
+<body>
+<nav th:replace="layout :: nav"></nav>
+
+<div th:fragment="content" class="p-4">
+    <h1 th:text="${team.id != null ? 'Edit Team' : 'Add Team'}"></h1> <!-- Changed from course to team, and text -->
+    <form method="post" th:action="@{/teams/save}" th:object="${team}"> <!-- Changed from /courses/save to /teams/save and course to team -->
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Team Name</label> <!-- Changed from Course Name to Team Name -->
+            <input type="text" class="form-control" id="name" th:field="*{name}">
+        </div>
+
+        <div class="mb-3">
+            <label for="coach" class="form-label">Select Coach</label> <!-- Changed from BOS Member to Select Coach -->
+            <select id="coach" class="form-select" th:field="*{coach}"> <!-- Changed bosMember to coach -->
+                <option th:each="coachOpt : ${coaches}" th:value="${coachOpt.id}" th:text="${coachOpt.name}"></option> <!-- Changed bosMember to coachOpt, bosMembers to coaches -->
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="members" class="form-label">Select Members</label>
+            <select id="members" class="form-select" th:field="*{members}" multiple>
+                <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.username}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="players" class="form-label">Players</label> <!-- Changed from Fuel Cells to Players -->
+            <div id="players"> <!-- Changed from fuelCells to players -->
+                <!-- Iterating over players if they exist on the team object -->
+                <div th:if="${team.players != null}" th:each="player, iterStat : *{players}" class="d-flex justify-content-between align-items-center mb-3"> <!-- Changed from course.fuelCells to team.players, fuelCell to player -->
+                    <div>
+                        <!-- Displaying Player attributes -->
+                        <span th:text="'Position: ' + ${player.position} + ', Jersey #: ' + ${player.jerseyNumber} + ', Skill: ' + ${player.skillLevel} + ', PPG: ' + ${player.pointsPerGame}"></span>
+                    </div>
+                    <div>
+                        <a th:href="@{'/players/' + ${player.id} + '/edit'}" class="btn btn-primary btn-sm">Edit Player</a> <!-- Changed link to /players/... and text -->
+                    </div>
+                </div>
+            </div>
+            <!-- Link to add a new player, ensuring team.id is available -->
+            <a th:if="${team.id != null}" th:href="@{'/players/new?teamId=' + ${team.id}}" class="btn btn-success">Add Player</a> <!-- Changed link to /players/new?teamId=... and text -->
+            <span th:unless="${team.id != null}" class="text-muted">Save the team first to add players.</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+    <nav th:replace="layout :: nav"></nav>
+    <div class="container mt-4" th:fragment="content">
+        <h1 class="text-center mb-4">User List</h1>
+        <a class="btn btn-primary mb-4" th:href="@{/users/new}">Add User</a>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col" th:each="user: ${users}">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-img-top d-flex justify-content-center align-items-center" style="height: 150px; background-color: #f8f9fa;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title" th:text="${user.username}">User Name</h5>
+                        <a class="btn btn-primary btn-sm" th:href="@{'/users/' + ${user.id}}">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Kpro2Application<kpro2>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "cz.uhk.kpro2.Kpro2Application",
+            "projectName": "kpro2",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

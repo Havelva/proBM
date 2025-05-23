@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: nav"></nav>
+    <div th:fragment="content" class="p-4">
+        <h1 th:text="${'Team: ' + team.name}"></h1> <!-- Changed from course to team -->
+        <h5 th:text="${'ID: ' + team.id}"></h5> <!-- Changed from course to team -->
+        <h3 th:if="${team.coach != null}" th:text="${'Coach: ' + team.coach.name}"></h3> <!-- Changed from course.bosMember to team.coach -->
+        <a th:href="@{'/teams/' + ${team.id} + '/edit'}" class="btn btn-primary">Edit Team</a> <!-- Changed link and text -->
+        <a th:href="@{'/teams/' + ${team.id} + '/delete'}" class="btn btn-danger">Delete Team</a> <!-- Changed link and text -->
+        <a th:href="@{'/players/new?teamId=' + ${team.id}}" class="btn btn-success">Add Player</a> <!-- Changed link and text -->
+        
+        <div class="mt-4" th:if="${team.members != null and not #lists.isEmpty(team.members)}"> <!-- Check if members list is not null and not empty -->
+            <h3>Team Members:</h3> <!-- Changed text -->
+            <ul class="list-group">
+                <li class="list-group-item" th:each="member : ${team.members}" th:text="${member.username}"></li> <!-- Changed from course.members to team.members -->
+            </ul>
+        </div>
+
+        <div class="mt-4" th:if="${team.players != null and not #lists.isEmpty(team.players)}"> <!-- Check if players list is not null and not empty -->
+            <h3>Players:</h3> <!-- Changed text -->
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center" th:each="player : ${team.players}"> <!-- Changed from course.fuelCells to team.players, fuelCell to player -->
+                    <div>
+                        <!-- Displaying Player attributes -->
+                        <span th:text="'Position: ' + ${player.position} + ', Jersey #: ' + ${player.jerseyNumber} + ', Skill: ' + ${player.skillLevel} + ', PPG: ' + ${player.pointsPerGame}"></span>
+                    </div>
+                    <div>
+                        <a th:href="@{'/players/' + ${player.id} + '/edit'}" class="btn btn-primary btn-sm">Edit</a>
+                        <a th:href="@{'/players/' + ${player.id} + '/delete'}" class="btn btn-danger btn-sm">Delete</a> <!-- Link to player delete confirmation page -->
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

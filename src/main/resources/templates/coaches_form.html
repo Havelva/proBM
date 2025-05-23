@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout :: head"></head>
+
+<body>
+<nav th:replace="layout :: nav"></nav>
+
+<div th:fragment="content" class="p-5">
+    <h1 th:text="${coach.id != null ? 'Edit Coach' : 'Add Coach'}"></h1> <!-- Changed bos to coach -->
+    <form method="post" th:action="@{/coaches/save}" th:object="${coach}"> <!-- Changed /bos/save to /coaches/save and bos to coach -->
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Coach Name</label> <!-- Changed BOS Name to Coach Name -->
+            <input type="text" class="form-control" id="name" th:field="*{name}">
+        </div>
+        <div class="mb-3"> <!-- Added field for experienceYears -->
+            <label for="experienceYears" class="form-label">Experience Years</label>
+            <input type="number" class="form-control" id="experienceYears" th:field="*{experienceYears}">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+</body>
+</html>
