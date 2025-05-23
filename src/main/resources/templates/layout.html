@@ -1,41 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${title}">Basketball Team Manager</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title th:text="${title != null ? title + ' | B-Ball Manager' : 'B-Ball Manager'}">Basketball Team Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 <body>
-    <nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/home}">Basketball Manager</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" th:href="@{/home}">🏀 B-Ball Manager</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" th:href="@{/users/}">Users</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/coaches/}">Coaches</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/teams/}">Teams</a></li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/home}"><i class="bi bi-house-door"></i> Home</a></li>
+                    <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a class="nav-link" th:href="@{/users/}"><i class="bi bi-people"></i> Users</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+                        <a class="nav-link" th:href="@{/coaches/}"><i class="bi bi-person-video3"></i> Coaches</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+                        <a class="nav-link" th:href="@{/teams/}"><i class="bi bi-diagram-3"></i> Teams</a>
+                    </li>
                 </ul>
-                <div class="ms-auto d-flex align-items-center">
-                    <span th:if="${authName != null}" class="me-3 fw-bold text-light" th:text="${authName}"></span>
-                    <form th:if="${authName != null}" th:action="@{/logout}" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-link text-light p-0" style="text-decoration: none;">Logout</button>
-                    </form>
-                    <ul th:if="${authName == null}" class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{/register}">Register</a></li>
-                    </ul>
+                <div class="d-flex align-items-center">
+                    <div sec:authorize="isAuthenticated()">
+                         <span class="navbar-text me-3 text-light">
+                             Hi, <strong sec:authentication="name">User</strong>!
+                         </span>
+                         <form th:action="@{/logout}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-outline-warning btn-sm"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                         </form>
+                    </div>
+                    <div sec:authorize="!isAuthenticated()">
+                        <a class="btn btn-outline-light btn-sm me-2" th:href="@{/login}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                        <a class="btn btn-warning btn-sm" th:href="@{/register}"><i class="bi bi-person-plus"></i> Register</a>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
-    <div class="container mt-4" th:fragment="content">
-        <!-- Content will be inserted here -->
+
+    <div class="alert-container">
+        <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill"></i> <span th:text="${successMessage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i> <span th:text="${errorMessage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div class="container mt-4 mb-5" th:fragment="content">
+        </div>
+
+    <div th:fragment="deleteModal" class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteModalLabel"><i class="bi bi-exclamation-triangle-fill"></i> Confirm Deletion</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete <strong id="deleteItemName">this item</strong>? This action cannot be undone.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Cancel</button>
+                    <form id="deleteForm" method="post" class="d-inline"> <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i> Yes, Delete!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer fixed-bottom"> <div class="container">
+            &copy; 2025 Basketball Manager - Impressive Semestral Project
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var deleteModalElement = document.getElementById('deleteConfirmModal');
+            if(deleteModalElement) {
+                var deleteModal = new bootstrap.Modal(deleteModalElement); // Initialize modal instance if not already
+                deleteModalElement.addEventListener('show.bs.modal', function (event) {
+                    var button = event.relatedTarget;
+                    var deleteUrl = button.getAttribute('data-delete-url');
+                    var itemName = button.getAttribute('data-item-name');
+
+                    var form = deleteModalElement.querySelector('#deleteForm');
+                    form.action = deleteUrl;
+
+                    var itemNameSpan = deleteModalElement.querySelector('#deleteItemName');
+                    itemNameSpan.textContent = itemName ? "'" + itemName + "'" : "this item";
+                });
+            }
+        });
+    </script>
 </body>
 </html>

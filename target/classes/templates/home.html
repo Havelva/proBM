@@ -1,48 +1,62 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: head"></head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{layout :: head(title='Welcome to B-Ball Manager')}"></head>
 <body>
-    <nav th:replace="layout :: nav"></nav>
+    <nav th:replace="~{layout :: nav}"></nav>
     <div class="container mt-4" th:fragment="content">
-        <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="p-5 mb-4 rounded-3 home-jumbotron">
             <div class="container-fluid py-5">
-                <h1 class="display-5 fw-bold">Welcome to the Basketball Team Manager</h1>
-                <p class="col-md-8 fs-4">Manage your basketball teams, players, and coaches with ease. Track player stats, schedule games, and build your championship team!</p>
+                <h1 class="display-4 fw-bold">Welcome to the Ultimate Basketball Team Manager!</h1>
+                <p class="col-md-8 fs-4">Your one-stop solution to manage teams, track players, and lead your way to victory.</p>
+                <a class="btn btn-primary btn-lg" th:href="@{/teams/}" role="button" sec:authorize="isAuthenticated()">
+                    <i class="bi bi-diagram-3-fill"></i> Manage My Teams
+                </a>
+                 <a class="btn btn-warning btn-lg" th:href="@{/register}" role="button" sec:authorize="!isAuthenticated()">
+                    <i class="bi bi-person-plus-fill"></i> Get Started - Register Now!
+                </a>
             </div>
         </div>
 
-        <div class="row align-items-md-stretch">
-            <div class="col-md-4">
-                <div class="h-100 p-5 text-white bg-dark rounded-3">
-                    <h2>Manage Teams</h2>
-                    <p>Create new teams, assign coaches, and add players. View team rosters and upcoming games.</p>
-                    <a class="btn btn-outline-light" th:href="@{/teams/}">View Teams</a>
+        <h2 class="text-center mb-4 display-6">Key Features</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 text-center">
+            <div class="col">
+                <div class="card feature-card h-100 p-4">
+                    <i class="bi bi-diagram-3-fill"></i>
+                    <h3 class="mt-3 fs-5">Manage Teams</h3>
+                    <p class="small">Create, view, and edit your basketball teams with ease.</p>
+                    <a class="btn btn-outline-primary mt-auto btn-sm" th:href="@{/teams/}" sec:authorize="isAuthenticated()">Go to Teams</a>
+                    <a class="btn btn-outline-secondary mt-auto btn-sm" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login to View</a>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="h-100 p-5 bg-light border rounded-3">
-                    <h2>Manage Players</h2>
-                    <p>Add new players, update their positions, jersey numbers, skill levels, and points per game. </p>
-                    <a class="btn btn-outline-secondary" th:href="@{/teams/}">View Players (via Teams)</a>
+            <div class="col">
+                 <div class="card feature-card h-100 p-4">
+                    <i class="bi bi-person-badge"></i>
+                    <h3 class="mt-3 fs-5">Track Players</h3>
+                    <p class="small">Manage player rosters, positions, skill levels, and stats.</p>
+                     <a class="btn btn-outline-primary mt-auto btn-sm" th:href="@{/teams/}" sec:authorize="isAuthenticated()">View Players</a>
+                     <a class="btn btn-outline-secondary mt-auto btn-sm" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login to View</a>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="h-100 p-5 text-white bg-dark rounded-3">
-                    <h2>Manage Coaches</h2>
-                    <p>Keep track of your coaching staff, their experience, and assigned teams.</p>
-                    <a class="btn btn-outline-light" th:href="@{/coaches/}">View Coaches</a>
+            <div class="col">
+                 <div class="card feature-card h-100 p-4">
+                    <i class="bi bi-person-video3"></i>
+                    <h3 class="mt-3 fs-5">Oversee Coaches</h3>
+                    <p class="small">Keep track of your coaching staff and their assignments.</p>
+                     <a class="btn btn-outline-primary mt-auto btn-sm" th:href="@{/coaches/}" sec:authorize="isAuthenticated()">View Coaches</a>
+                     <a class="btn btn-outline-secondary mt-auto btn-sm" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login to View</a>
                 </div>
             </div>
-        </div>
-         <div class="row mt-4">
-            <div class="col-md-12">
-                <div class="h-100 p-5 bg-light border rounded-3">
-                    <h2>User Management</h2>
-                    <p>Manage user accounts for the application.</p>
-                    <a class="btn btn-outline-secondary" th:href="@{/users/}">View Users</a>
+             <div class="col">
+                 <div class="card feature-card h-100 p-4">
+                    <i class="bi bi-people-fill"></i>
+                    <h3 class="mt-3 fs-5">User Accounts</h3>
+                    <p class="small">Administer user accounts and access levels for the application.</p>
+                     <a class="btn btn-outline-primary mt-auto btn-sm" th:href="@{/users/}" sec:authorize="hasRole('ROLE_ADMIN')">Manage Users</a>
+                     <p class="small text-muted mt-auto" sec:authorize="!hasRole('ROLE_ADMIN') && isAuthenticated()">Admin access required.</p>
+                     <a class="btn btn-outline-secondary mt-auto btn-sm" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login to View</a>
                 </div>
             </div>
         </div>
     </div>
-</body>
+    </body>
 </html>

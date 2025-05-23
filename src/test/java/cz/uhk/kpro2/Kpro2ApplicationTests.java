@@ -1,132 +1,199 @@
 package cz.uhk.kpro2;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
+
 import cz.uhk.kpro2.model.Coach;
 import cz.uhk.kpro2.model.Player;
+import cz.uhk.kpro2.model.PlayerPosition;
 import cz.uhk.kpro2.model.Team;
 import cz.uhk.kpro2.model.User;
 import cz.uhk.kpro2.service.CoachService;
 import cz.uhk.kpro2.service.PlayerService;
 import cz.uhk.kpro2.service.TeamService;
 import cz.uhk.kpro2.service.UserService;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional // Rolls back transactions after each test, ensuring clean state
 class Kpro2ApplicationTests {
 
-    @Autowired
-    private UserService userService;
+    @Autowired private UserService userService;
+    @Autowired private CoachService coachService;
+    @Autowired private TeamService teamService;
+    @Autowired private PlayerService playerService;
+    @Autowired private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private CoachService coachService;
+    private User testAdmin;
+    private User testUser;
 
-    @Autowired
-    private TeamService teamService;
+    @BeforeEach
+    void setUpTestData() {
+        // Create common users for tests if needed, they will be rolled back
+        if (userService.findByUsername("test_admin_junit") == null) {
+            testAdmin = new User();
+            testAdmin.setUsername("test_admin_junit");
+            testAdmin.setPassword("adminPass123"); // Raw password
+            testAdmin.setRoles("ROLE_ADMIN,ROLE_USER");
+            userService.saveUser(testAdmin); // Service will encode
+        } else {
+            testAdmin = userService.findByUsername("test_admin_junit");
+        }
 
-    @Autowired
-    private PlayerService playerService;
+
+        if (userService.findByUsername("test_user_junit") == null) {
+            testUser = new User();
+            testUser.setUsername("test_user_junit");
+            testUser.setPassword("userPass123");
+            testUser.setRoles("ROLE_USER");
+            userService.saveUser(testUser);
+        } else {
+            testUser = userService.findByUsername("test_user_junit");
+        }
+    }
 
     @Test
     void contextLoads() {
+        assertNotNull(userService);
+        assertNotNull(coachService);
+        assertNotNull(teamService);
+        assertNotNull(playerService);
+        assertNotNull(passwordEncoder);
     }
 
     @Test
-    @Transactional // Use Transactional to handle lazy loading or session issues if any
     void testUserCreationAndRetrieval() {
-        User user = new User();
-        user.setUsername("testuser");
-        user.setPassword("password"); // In a real app, password would be hashed by the service
-        User savedUser = userService.saveUser(user);
+        User newUser = new User();
+        newUser.setUsername("unique_junit_user");
+        newUser.setPassword("securePassword123");
+        newUser.setRoles("ROLE_GUEST");
+
+        User savedUser = userService.saveUser(newUser);
 
         assertNotNull(savedUser, "Saved user should not be null");
         assertNotNull(savedUser.getId(), "Saved user ID should not be null");
-        assertEquals("testuser", savedUser.getUsername(), "Username should match");
+        assertEquals("unique_junit_user", savedUser.getUsername());
+        assertTrue(passwordEncoder.matches("securePassword123", savedUser.getPassword()), "Encoded password should match");
+        assertEquals("ROLE_GUEST", savedUser.getRoles());
 
-        User retrievedUser = userService.findByUsername("testuser");
-        assertNotNull(retrievedUser, "Retrieved user should not be null");
-        assertEquals(savedUser.getId(), retrievedUser.getId(), "Retrieved user ID should match saved user ID");
+        User retrievedUser = userService.findByUsername("unique_junit_user");
+        assertNotNull(retrievedUser);
+        assertEquals(savedUser.getId(), retrievedUser.getId());
     }
 
     @Test
-    @Transactional
-    void testCoachCreationAndRetrieval() {
+    void testUsernameUniqueness() {
+        // testAdmin already exists from setUp
+        assertFalse(userService.isUsernameUnique("test_admin_junit", null), "Username should be taken by new user");
+        assertTrue(userService.isUsernameUnique("test_admin_junit", testAdmin.getId()), "Username should be unique for the same user being edited");
+        assertTrue(userService.isUsernameUnique("completely_new_username", null), "New username should be unique");
+    }
+
+
+    @Test
+    void testCoachCreationAndDeletion() {
         Coach coach = new Coach();
-        coach.setName("Test Coach");
+        coach.setName("Coach JUnit Test");
         coach.setExperienceYears(5);
         Coach savedCoach = coachService.saveCoach(coach);
 
-        assertNotNull(savedCoach, "Saved coach should not be null");
-        assertNotNull(savedCoach.getId(), "Saved coach ID should not be null");
-        assertEquals("Test Coach", savedCoach.getName(), "Coach name should match");
+        assertNotNull(savedCoach);
+        assertNotNull(savedCoach.getId());
+        assertEquals("Coach JUnit Test", savedCoach.getName());
 
-        Coach retrievedCoach = coachService.getCoach(savedCoach.getId());
-        assertNotNull(retrievedCoach, "Retrieved coach should not be null");
-        assertEquals(savedCoach.getId(), retrievedCoach.getId(), "Retrieved coach ID should match");
+        long coachId = savedCoach.getId();
+        coachService.deleteCoach(coachId);
+        assertNull(coachService.getCoach(coachId), "Coach should be deleted");
     }
 
     @Test
-    @Transactional
-    void testTeamCreationAndAssignment() {
+    void testTeamAndPlayerFullLifecycle() {
+        // 1. Create Coach
         Coach coach = new Coach();
-        coach.setName("Team Coach");
-        coach.setExperienceYears(10);
+        coach.setName("Lifecycle Test Coach");
+        coach.setExperienceYears(8);
         Coach savedCoach = coachService.saveCoach(coach);
 
+        // 2. Create Team
         Team team = new Team();
-        team.setName("Test Team");
+        team.setName("Lifecycle Test Team");
         team.setCoach(savedCoach);
+        team.getMembers().add(testUser); // Add a member
         Team savedTeam = teamService.saveTeam(team);
+        assertNotNull(savedTeam.getId());
+        assertEquals(1, savedTeam.getMembers().size());
 
-        assertNotNull(savedTeam, "Saved team should not be null");
-        assertNotNull(savedTeam.getId(), "Saved team ID should not be null");
-        assertEquals("Test Team", savedTeam.getName(), "Team name should match");
-        assertNotNull(savedTeam.getCoach(), "Team coach should not be null");
-        assertEquals(savedCoach.getId(), savedTeam.getCoach().getId(), "Team coach ID should match");
+        // 3. Create Player for the Team
+        Player player = new Player();
+        player.setName("Lifecycle Test Player");
+        player.setPosition(PlayerPosition.SMALL_FORWARD);
+        player.setJerseyNumber(33);
+        player.setSkillLevel("All-Star");
+        player.setPointsPerGame(22.5);
+        player.setTeam(savedTeam); // Associate with the saved team
+        Player savedPlayer = playerService.savePlayer(player);
+        assertNotNull(savedPlayer.getId());
+        assertEquals(savedTeam.getId(), savedPlayer.getTeam().getId());
 
-        Team retrievedTeam = teamService.getTeam(savedTeam.getId());
-        assertNotNull(retrievedTeam, "Retrieved team should not be null");
-        assertEquals(savedTeam.getId(), retrievedTeam.getId(), "Retrieved team ID should match");
+        // 4. Retrieve Team and verify player association
+        Team retrievedTeamWithPlayer = teamService.getTeam(savedTeam.getId());
+        assertNotNull(retrievedTeamWithPlayer);
+        assertFalse(retrievedTeamWithPlayer.getPlayers().isEmpty(), "Team should have players");
+        assertEquals(1, retrievedTeamWithPlayer.getPlayers().size());
+        assertEquals(savedPlayer.getName(), retrievedTeamWithPlayer.getPlayers().get(0).getName());
+
+        // 5. Update Player
+        savedPlayer.setPointsPerGame(25.0);
+        playerService.savePlayer(savedPlayer);
+        Player updatedPlayer = playerService.getPlayer(savedPlayer.getId());
+        assertEquals(25.0, updatedPlayer.getPointsPerGame());
+
+        // 6. Delete Player
+        playerService.deletePlayer(savedPlayer.getId());
+        assertNull(playerService.getPlayer(savedPlayer.getId()), "Player should be deleted");
+
+        Team teamAfterPlayerDeletion = teamService.getTeam(savedTeam.getId());
+        assertTrue(teamAfterPlayerDeletion.getPlayers().isEmpty(), "Team's player list should be empty");
+
+        // 7. Delete Team (should cascade delete players if any remained, and remove associations)
+        teamService.deleteTeam(savedTeam.getId());
+        assertNull(teamService.getTeam(savedTeam.getId()), "Team should be deleted");
+
+        // 8. Coach should still exist
+        Coach stillExistingCoach = coachService.getCoach(savedCoach.getId());
+        assertNotNull(stillExistingCoach);
     }
 
-    @Test
-    @Transactional
-    void testPlayerCreationAndAssignment() {
-        Coach coach = new Coach();
-        coach.setName("Player Team Coach");
-        coach.setExperienceYears(3);
-        coachService.saveCoach(coach);
+     @Test
+    void testPasswordEncodingOnUserUpdate() {
+        User userToUpdate = userService.findByUsername("test_user_junit");
+        assertNotNull(userToUpdate);
+        String oldEncodedPassword = userToUpdate.getPassword();
 
-        Team team = new Team();
-        team.setName("Player Test Team");
-        team.setCoach(coach);
-        teamService.saveTeam(team);
+        // Scenario 1: Update username, password field is empty (should keep old password)
+        userToUpdate.setUsername("test_user_junit_updated");
+        userToUpdate.setPassword(null); // Simulate empty password field in form
+        userService.saveUser(userToUpdate);
 
-        Player player = new Player();
-        player.setName("Test Player");
-        player.setPosition("Guard");
-        player.setJerseyNumber(23);
-        player.setSkillLevel("High");
-        player.setPointsPerGame(25.5);
-        player.setTeam(team);
-        Player savedPlayer = playerService.savePlayer(player);
+        User updatedUser1 = userService.findByUsername("test_user_junit_updated");
+        assertNotNull(updatedUser1);
+        assertEquals(oldEncodedPassword, updatedUser1.getPassword(), "Password should not have changed when field was empty");
 
-        assertNotNull(savedPlayer, "Saved player should not be null");
-        assertNotNull(savedPlayer.getId(), "Saved player ID should not be null");
-        assertEquals("Test Player", savedPlayer.getName(), "Player name should match");
-        assertNotNull(savedPlayer.getTeam(), "Player team should not be null");
-        assertEquals(team.getId(), savedPlayer.getTeam().getId(), "Player team ID should match");
-
-        Player retrievedPlayer = playerService.getPlayer(savedPlayer.getId());
-        assertNotNull(retrievedPlayer, "Retrieved player should not be null");
-        assertEquals(savedPlayer.getId(), retrievedPlayer.getId(), "Retrieved player ID should match");
-
-        // Test deletion
-        playerService.deletePlayer(savedPlayer.getId());
-        Player deletedPlayer = playerService.getPlayer(savedPlayer.getId());
-        assertNull(deletedPlayer, "Deleted player should be null");
+        // Scenario 2: Update password
+        userToUpdate.setPassword("newPassword123");
+        userService.saveUser(userToUpdate);
+        User updatedUser2 = userService.findByUsername("test_user_junit_updated");
+        assertNotNull(updatedUser2);
+        assertTrue(passwordEncoder.matches("newPassword123", updatedUser2.getPassword()), "Password should be updated and encoded");
+        assertNotEquals(oldEncodedPassword, updatedUser2.getPassword());
     }
 }

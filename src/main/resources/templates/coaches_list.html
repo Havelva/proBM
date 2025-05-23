@@ -1,18 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-<head th:replace="layout :: head"></head>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{layout :: head(title='Coaches')}"></head>
 <body>
-<nav th:replace="layout :: nav"></nav>
+<nav th:replace="~{layout :: nav}"></nav>
 
-<div th:fragment="content" class="p-5">
-    <h1 class="text-center">List of Coaches</h1> <!-- Changed title -->
-    <a class="btn btn-primary mb-3" th:href="@{/coaches/new}">Add new Coach</a> <!-- Changed button text and link -->
-    <ul class="list-group">
-        <li class="list-group-item" th:each="coach: ${coachesList}"> <!-- Changed iteration variable and list name -->
-            <a th:href="@{'/coaches/' + ${coach.id}}" th:text="${coach.name}"></a> <!-- Changed link and text variable -->
-        </li>
-    </ul>
+<div class="container mt-4" th:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="bi bi-person-video3"></i> Coaches</h1>
+        <a class="btn btn-primary" th:href="@{/coaches/new}" sec:authorize="hasRole('ROLE_ADMIN')">
+            <i class="bi bi-plus-circle"></i> Add New Coach
+        </a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="col" th:each="coach : ${coachesList}">
+            <div class="card h-100 shadow-sm">
+                 <div class="card-header bg-info text-white"> <i class="bi bi-person-workspace"></i> <span th:text="${coach.name}">Coach Name</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <i class="bi bi-award-fill"></i> Experience: <span th:text="${coach.experienceYears}">0</span> years
+                    </p>
+                </div>
+                <div class="card-footer text-end bg-white border-top-0">
+                    <a th:href="@{'/coaches/' + ${coach.id}}" class="btn btn-outline-info btn-sm me-1" title="View Details"><i class="bi bi-eye"></i> View</a>
+                    <a th:href="@{'/coaches/' + ${coach.id} + '/edit'}" class="btn btn-outline-primary btn-sm me-1" title="Edit Coach" sec:authorize="hasRole('ROLE_ADMIN')"><i class="bi bi-pencil"></i> Edit</a>
+                    <button type="button" class="btn btn-outline-danger btn-sm" title="Delete Coach"
+                            data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
+                            th:attr="data-delete-url=@{'/coaches/' + ${coach.id} + '/delete'}, data-item-name=${coach.name}"
+                            sec:authorize="hasRole('ROLE_ADMIN')">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12" th:if="${#lists.isEmpty(coachesList)}">
+            <div class="alert alert-info text-center">
+                <i class="bi bi-info-circle-fill"></i> No coaches found.
+                <a th:href="@{/coaches/new}" class="alert-link" sec:authorize="hasRole('ROLE_ADMIN')">Add one now</a>!
+            </div>
+        </div>
+    </div>
 </div>
+<div th:replace="~{layout :: deleteModal}"></div>
 </body>
 </html>

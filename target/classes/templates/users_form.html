@@ -1,22 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: head"></head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{layout :: head(title=${user.id != null ? 'Edit User' : 'Add User'})}"></head>
 <body>
-    <nav th:replace="layout :: nav"></nav>
-    <div class="container mt-4" th:fragment="content">
-        <h1 th:text="${user.id != null ? 'Edit User' : 'Add User'}" class="text-center mb-4"></h1>
-        <form method="post" th:action="@{/users/save}" th:object="${user}" class="col-md-6 offset-md-3">
-            <input type="hidden" th:field="*{id}">
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" th:field="*{username}" required>
+<nav th:replace="~{layout :: nav}"></nav>
+
+<div class="container mt-4" th:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <i th:class="${user.id != null ? 'bi bi-pencil-square' : 'bi bi-person-plus-fill'}"></i>
+                    <span th:text="${user.id != null ? 'Edit User: ' + user.username : 'Add New User'}"></span>
+                </div>
+                <div class="card-body">
+                    <form method="post" th:action="@{/users/save}" th:object="${user}">
+                        <input type="hidden" th:field="*{id}">
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" th:field="*{username}"
+                                   th:classappend="${#fields.hasErrors('username')} ? 'is-invalid' : ''" required>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" th:placeholder="${user.id != null ? 'Leave blank to keep current password' : ''}"
+                                   th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''"
+                                   th:required="${user.id == null}"> <small class="form-text text-muted" th:if="${user.id == null}">Must be at least 6 characters.</small>
+                             <small class="form-text text-muted" th:if="${user.id != null}">Leave blank to keep current. If changing, must be at least 6 characters.</small>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
+                        </div>
+
+                        <div class="mb-3" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <label for="roles" class="form-label">Roles (comma-separated, e.g., ROLE_USER,ROLE_ADMIN)</label>
+                            <input type="text" class="form-control" id="roles" th:field="*{roles}"
+                                   th:classappend="${#fields.hasErrors('roles')} ? 'is-invalid' : ''" required>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">Roles error</div>
+                        </div>
+
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a th:href="@{/users/}" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Cancel</a>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-save-fill"></i> Save User</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="mb-3" th:if="${user.id == null}"> <!-- Only show password field for new users -->
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" th:field="*{password}" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Save User</button>
-        </form>
+        </div>
     </div>
+</div>
 </body>
 </html>

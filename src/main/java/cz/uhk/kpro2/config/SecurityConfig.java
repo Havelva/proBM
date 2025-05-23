@@ -2,10 +2,12 @@ package cz.uhk.kpro2.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig {
@@ -13,21 +15,35 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/register", "/login", "/css/**", "/js/**", "/home", "/").permitAll() // Added /home and / to permitAll
-                // Permit all access to player-related paths for now, can be restricted later
-                .requestMatchers("/players/**", "/teams/**", "/coaches/**", "/users/**").permitAll() // Changed from /fuel-cells/** and added others
+                .requestMatchers("/register", "/login", "/css/**", "/js/**", "/home", "/", "/h2-console/**").permitAll()
+                // Admin can manage users and coaches
+                .requestMatchers(HttpMethod.GET, "/users/**", "/coaches/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/users/**", "/coaches/**").hasRole("ADMIN")
+                // Users and Admins can view teams and players
+                .requestMatchers(HttpMethod.GET, "/teams/**", "/players/**").hasAnyRole("ADMIN", "USER")
+                // Users and Admins can create/edit/delete their own data or managed data
+                .requestMatchers(HttpMethod.POST, "/teams/**", "/players/**").hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated()
         ).csrf(csrf -> csrf
-                .ignoringRequestMatchers("/players/**", "/teams/**", "/coaches/**", "/users/**") // Disable CSRF for new paths
+                .ignoringRequestMatchers("/h2-console/**")
+        ).headers(headers -> headers
+            .frameOptions(frameOptions -> frameOptions.sameOrigin())
         ).formLogin(form -> form
                 .loginPage("/login")
                 .defaultSuccessUrl("/home", true)
                 .failureUrl("/login?error=true")
                 .permitAll()
         ).logout(logout -> logout
-                .logoutSuccessUrl("/login?logout") // Added ?logout for a potential logout message
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                .logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID", "remember-me")
                 .permitAll()
+        ).rememberMe(remember -> remember
+                .key("aVerySecretKeyForTheRememberMeCookie") // Change this key for production
+                .tokenValiditySeconds(7 * 24 * 60 * 60) // 7 days
         );
+
         return http.build();
     }
 

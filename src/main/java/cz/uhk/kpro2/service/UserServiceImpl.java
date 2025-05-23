@@ -1,57 +1,70 @@
 package cz.uhk.kpro2.service;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.uhk.kpro2.model.User;
 import cz.uhk.kpro2.repository.UserRepository;
-import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-
     private final UserRepository userRepository;
-    // Consider adding PasswordEncoder here if not already handled in SecurityConfig
-    // private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) { // Potentially add PasswordEncoder to constructor
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        // this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
+    @Override @Transactional(readOnly = true)
+    public List<User> getAllUsers() { return userRepository.findAll(); }
 
-    @Override
-    public User getUser(long id) {
-        Optional<User> user = userRepository.findById(id);
-        return user.orElse(null);
-    }
+    @Override @Transactional(readOnly = true)
+    public User getUser(long id) { return userRepository.findById(id).orElse(null); }
 
-    @Override
-    public User saveUser(User user) { // Changed return type from void to User
-        // if (user.getPassword() != null && !user.getPassword().startsWith("$2a$")) { // Basic check if password might be unencoded
-        //    user.setPassword(passwordEncoder.encode(user.getPassword()));
-        // }
-        return userRepository.save(user); // Return the saved entity
-    }
-
-    @Override
-    public void deleteUser(long id) {
-        userRepository.deleteById(id);
-    }
-
-    @Override
-    public User findByUsername(String username) {
-        // Consider optimizing this if UserRepository can directly findByUsername
-        // return userRepository.findByUsername(username).orElse(null);
-        // For now, keeping the loop, but a direct repository method is preferred.
-        for (User user : userRepository.findAll()) {
-            if (user.getUsername().equals(username)) {
-                return user;
+    @Override @Transactional
+    public User saveUser(User user) {
+        // Handle password encoding for new users or if password is changed
+        if (user.getId() == null) { // New user
+            if (user.getPassword() == null || user.getPassword().isEmpty()) {
+                // This should be caught by validation, but as a fallback
+                throw new IllegalArgumentException("Password cannot be empty for a new user.");
+            }
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        } else { // Existing user
+            if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+                // Password field was filled, so encode the new password
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+            } else {
+                // Password field was empty, keep the existing password
+                User existingUser = userRepository.findById(user.getId())
+                                      .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + user.getId() + " for password retention."));
+                user.setPassword(existingUser.getPassword());
             }
         }
-        return null;
+        if (user.getRoles() == null || user.getRoles().isEmpty()) {
+            user.setRoles("ROLE_USER"); // Default role if not specified
+        }
+        return userRepository.save(user);
+    }
+
+    @Override @Transactional
+    public void deleteUser(long id) { userRepository.deleteById(id); }
+
+    @Override @Transactional(readOnly = true)
+    public User findByUsername(String username) { return userRepository.findByUsername(username); }
+
+    @Override @Transactional(readOnly = true)
+    public boolean isUsernameUnique(String username, Long userId) {
+        User existingUser = userRepository.findByUsername(username);
+        if (existingUser == null) {
+            return true; // Username is not taken
+        }
+        // If username is taken, check if it belongs to the current user being edited
+        return userId != null && existingUser.getId().equals(userId);
     }
 }

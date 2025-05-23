@@ -1,77 +1,74 @@
 package cz.uhk.kpro2.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "players") // Changed from "fuel_cells" to "players"
-public class Player { // Changed from FuelCell to Player
+@Table(name = "players")
+public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Changed from long to Long
+    private Long id;
 
-    private String name; // Added name field
-    private String position; // Changed from height to position
-    private int jerseyNumber; // Changed from width to jerseyNumber
-    private String skillLevel; // Changed from quality to skillLevel
-    private double pointsPerGame; // Changed from holeOffcenter to pointsPerGame
+    @NotEmpty(message = "Player name cannot be empty.")
+    @Size(max = 100, message = "Player name cannot exceed 100 characters.")
+    @Column(nullable = false, length = 100)
+    private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "team_id", nullable = false) // Changed from "course_id" to "team_id"
-    private Team team; // Changed from Course to Team
+    @NotNull(message = "Position must be selected.")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PlayerPosition position;
 
-    public Long getId() { // Changed return type from long to Long
-        return id;
-    }
+    @NotNull(message = "Jersey number is required.")
+    @Min(value = 0, message = "Jersey number cannot be negative.")
+    @Max(value = 99, message = "Jersey number cannot exceed 99.")
+    @Column(nullable = false)
+    private Integer jerseyNumber;
 
-    public void setId(Long id) { // Changed parameter type from long to Long
-        this.id = id;
-    }
+    @NotEmpty(message = "Skill level cannot be empty.")
+    @Size(max = 50, message = "Skill level cannot exceed 50 characters.")
+    @Column(nullable = false, length = 50)
+    private String skillLevel;
 
-    public String getName() { // Added getter for name
-        return name;
-    }
+    @NotNull(message = "Points per game is required.")
+    @DecimalMin(value = "0.0", message = "Points per game must be zero or positive.")
+    @Column(nullable = false)
+    private Double pointsPerGame;
 
-    public void setName(String name) { // Added setter for name
-        this.name = name;
-    }
+    @NotNull(message = "Player must be associated with a team.")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id", nullable = false)
+    private Team team;
 
-    public String getPosition() { // Changed from getHeight to getPosition
-        return position;
-    }
-
-    public void setPosition(String position) { // Changed from setHeight to setPosition
-        this.position = position;
-    }
-
-    public int getJerseyNumber() { // Changed from getWidth to getJerseyNumber
-        return jerseyNumber;
-    }
-
-    public void setJerseyNumber(int jerseyNumber) { // Changed from setWidth to setJerseyNumber
-        this.jerseyNumber = jerseyNumber;
-    }
-
-    public String getSkillLevel() { // Changed from getQuality to getSkillLevel
-        return skillLevel;
-    }
-
-    public void setSkillLevel(String skillLevel) { // Changed from setQuality to setSkillLevel
-        this.skillLevel = skillLevel;
-    }
-
-    public double getPointsPerGame() { // Changed from getHoleOffcenter to getPointsPerGame
-        return pointsPerGame;
-    }
-
-    public void setPointsPerGame(double pointsPerGame) { // Changed from setHoleOffcenter to setPointsPerGame
-        this.pointsPerGame = pointsPerGame;
-    }
-
-    public Team getTeam() { // Changed from getCourse to getTeam
-        return team;
-    }
-
-    public void setTeam(Team team) { // Changed from setCourse to setTeam
-        this.team = team;
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public PlayerPosition getPosition() { return position; }
+    public void setPosition(PlayerPosition position) { this.position = position; }
+    public Integer getJerseyNumber() { return jerseyNumber; }
+    public void setJerseyNumber(Integer jerseyNumber) { this.jerseyNumber = jerseyNumber; }
+    public String getSkillLevel() { return skillLevel; }
+    public void setSkillLevel(String skillLevel) { this.skillLevel = skillLevel; }
+    public Double getPointsPerGame() { return pointsPerGame; }
+    public void setPointsPerGame(Double pointsPerGame) { this.pointsPerGame = pointsPerGame; }
+    public Team getTeam() { return team; }
+    public void setTeam(Team team) { this.team = team; }
 }

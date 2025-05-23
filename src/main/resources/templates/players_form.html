@@ -1,39 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
-<head th:replace="layout :: head"></head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head(title=${player.id != null ? 'Edit Player' : 'Add Player'})}"></head>
 <body>
-<nav th:replace="layout :: nav"></nav>
+<nav th:replace="~{layout :: nav}"></nav>
 
-<div th:fragment="content" class="p-4">
-    <h1 th:text="${player.id != null ? 'Edit Player' : 'Add Player'}"></h1>
-    <form method="post" th:action="@{/players/save}" th:object="${player}">
-        <input type="hidden" th:field="*{id}">
-        <input type="hidden" th:field="*{team.id}">
+<div class="container mt-4" th:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <i th:class="${player.id != null ? 'bi bi-pencil-square' : 'bi bi-person-plus-fill'}"></i>
+                    <span th:text="${player.id != null ? 'Edit Player: ' + player.name : 'Add Player to ' + teamName}"></span>
+                </div>
+                <div class="card-body">
+                    <form method="post" th:action="@{/players/save}" th:object="${player}">
+                        <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:if="${player.team != null}" th:field="*{team.id}">
 
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" th:field="*{name}">
-        </div>
-        <div class="mb-3">
-            <label for="position" class="form-label">Position</label>
-            <input type="text" class="form-control" id="position" th:field="*{position}">
-        </div>
-        <div class="mb-3">
-            <label for="jerseyNumber" class="form-label">Jersey Number</label>
-            <input type="number" class="form-control" id="jerseyNumber" th:field="*{jerseyNumber}">
-        </div>
-        <div class="mb-3">
-            <label for="skillLevel" class="form-label">Skill Level</label>
-            <input type="text" class="form-control" id="skillLevel" th:field="*{skillLevel}">
-        </div>
-        <div class="mb-3">
-            <label for="pointsPerGame" class="form-label">Points Per Game</label>
-            <input type="number" step="0.1" class="form-control" id="pointsPerGame" th:field="*{pointsPerGame}">
-        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Player Name</label>
+                            <input type="text" class="form-control" id="name" th:field="*{name}" required
+                                   th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+                        </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
-        <a th:if="${player.id != null}" th:href="@{'/players/' + ${player.id} + '/delete'}" class="btn btn-danger">Remove</a>
-    </form>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="position" class="form-label">Position</label>
+                                <select class="form-select" id="position" th:field="*{position}" required
+                                        th:classappend="${#fields.hasErrors('position')} ? 'is-invalid' : ''">
+                                     <option value="">-- Select Position --</option>
+                                     <option th:each="pos : ${T(cz.uhk.kpro2.model.PlayerPosition).values()}"
+                                             th:value="${pos}"
+                                             th:text="${pos.fullName}"></option>
+                                </select>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('position')}" th:errors="*{position}">Position Error</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="jerseyNumber" class="form-label">Jersey Number</label>
+                                <input type="number" class="form-control" id="jerseyNumber" th:field="*{jerseyNumber}" required
+                                       th:classappend="${#fields.hasErrors('jerseyNumber')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('jerseyNumber')}" th:errors="*{jerseyNumber}">Jersey # Error</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="skillLevel" class="form-label">Skill Level</label>
+                                <input type="text" class="form-control" id="skillLevel" th:field="*{skillLevel}" placeholder="e.g., Pro, Amateur, Rookie" required
+                                       th:classappend="${#fields.hasErrors('skillLevel')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('skillLevel')}" th:errors="*{skillLevel}">Skill Level Error</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="pointsPerGame" class="form-label">Points Per Game (PPG)</label>
+                                <input type="number" step="0.1" class="form-control" id="pointsPerGame" th:field="*{pointsPerGame}" required
+                                       th:classappend="${#fields.hasErrors('pointsPerGame')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('pointsPerGame')}" th:errors="*{pointsPerGame}">PPG Error</div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a th:href="${player.team != null ? '/teams/' + player.team.id : '/teams'}" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Cancel</a>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-save-fill"></i> Save Player</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

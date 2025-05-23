@@ -1,25 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: head"></head>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{layout :: head(title='User Details: ' + ${user.username})}"></head>
 <body>
-    <nav th:replace="layout :: nav"></nav>
-    <div class="container mt-4" th:fragment="content">
-        <h1 class="text-center mb-4" th:text="${'User Details: ' + user.username}"></h1>
-        <div class="card col-md-6 offset-md-3">
-            <div class="card-body">
-                <h5 class="card-title">Username: <span th:text="${user.username}" class="fw-normal"></span></h5>
-                <p class="card-text">ID: <span th:text="${user.id}" class="fw-normal"></span></p>
-                <!-- Removed Spolkový věk/start date as it's not part of the generic user model anymore -->
-            </div>
-            <div class="card-footer text-center">
-                <a class="btn btn-primary me-2" th:href="@{'/users/' + ${user.id} + '/edit'}">Edit User</a>
-                <a class="btn btn-danger" th:href="@{'/users/' + ${user.id} + '/delete'}">Delete User</a>
-            </div>
+<nav th:replace="~{layout :: nav}"></nav>
+
+<div class="container mt-4" th:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-0"><i class="bi bi-person-lines-fill"></i> User: <span th:text="${user.username}"></span></h1>
+        <a th:href="@{/users/}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left-circle"></i> Back to Users List</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">ID</dt>
+                <dd class="col-sm-9" th:text="${user.id}"></dd>
+
+                <dt class="col-sm-3">Username</dt>
+                <dd class="col-sm-9" th:text="${user.username}"></dd>
+
+                <dt class="col-sm-3">Roles</dt>
+                <dd class="col-sm-9" th:text="${user.roles}"></dd>
+            </dl>
         </div>
-        <div class="text-center mt-3">
-            <a th:href="@{/users/}" class="btn btn-secondary">Back to User List</a>
+        <div class="card-footer text-end bg-light" sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="btn btn-primary btn-sm me-2" th:href="@{'/users/' + ${user.id} + '/edit'}"><i class="bi bi-pencil-square"></i> Edit User</a>
+            <button type="button" class="btn btn-danger btn-sm"
+                    data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
+                    th:attr="data-delete-url=@{'/users/' + ${user.id} + '/delete'}, data-item-name=${user.username}"
+                    th:disabled="${user.username == #authentication.name or #strings.toLowerCase(user.username) == 'admin'}">
+                <i class="bi bi-trash-fill"></i> Delete User
+            </button>
         </div>
     </div>
+</div>
+
+<div th:replace="~{layout :: deleteModal}"></div>
 </body>
 </html>
