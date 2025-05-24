@@ -135,7 +135,7 @@ body {
 
 /* Home Page Jumbotron */
 .home-jumbotron {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://placehold.co/1920x600/343a40/EAE0D0?text=Basketball+Action!&font=raleway');
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1519861531473-920026218875?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80'); /* New dynamic image */
     background-size: cover;
     background-position: center center;
     color: white;
@@ -151,11 +151,43 @@ body {
     text-align: center;
     background-color: #ffffff;
     padding: 1.5rem;
+    border-radius: 0.5rem; /* Match other cards */
 }
 .feature-card .bi {
     font-size: 3rem;
     color: #007bff;
     margin-bottom: 1rem;
+}
+
+/* Dashboard Specific Styles */
+.dashboard-section {
+    background-color: #e9ecef; /* Light grey background for the whole section */
+    padding: 2rem 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.dashboard-section .card-header {
+    font-size: 1.2rem; /* Slightly larger header text for dashboard cards */
+}
+
+.dashboard-section .list-group-item {
+    background-color: #fff; /* Ensure list items are white */
+    border-bottom: 1px solid #eee; /* Subtle separator */
+}
+.dashboard-section .list-group-item:last-child {
+    border-bottom: none;
+}
+
+.dashboard-section .list-group-item-action:hover,
+.dashboard-section .list-group-item-action:focus {
+    background-color: #f8f9fa; /* Light hover effect */
+    color: #0056b3;
+}
+
+.dashboard-section .card-footer {
+    background-color: #f8f9fa; /* Light footer for cards */
+    border-top: 1px solid #dee2e6;
 }
 
 /* Alert Container for Flash Messages */
@@ -213,13 +245,22 @@ body {
 /* Table Styling */
 .table {
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,.05);
+    /* box-shadow: 0 2px 4px rgba(0,0,0,.05); Removed for card internal tables */
 }
 .table thead th {
-    background-color: #e9ecef;
+    background-color: #e9ecef; /* Default for general tables */
     font-weight: 600;
     vertical-align: middle;
 }
+
+.table thead.table-light th { /* For general tables within cards */
+    background-color: #f8f9fa; /* Lighter header for tables in cards */
+}
+.table thead.table-dark th { /* For main list tables that might be outside cards, or specific emphasis */
+     background-color: #343a40;
+     color: #fff;
+}
+
 .table td {
     vertical-align: middle;
 }

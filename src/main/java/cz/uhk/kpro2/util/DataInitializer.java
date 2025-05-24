@@ -94,24 +94,28 @@ public class DataInitializer implements CommandLineRunner {
         eagles.setMembers(List.of(user2));
         teamService.saveTeam(eagles); // Save team to get ID
 
-        // Create Players
+        // Create Players with Detailed Stats
         Player p1 = new Player();
         p1.setName("Michael Jordan"); p1.setJerseyNumber(23); p1.setPointsPerGame(30.1);
+        p1.setAssistsPerGame(5.3); p1.setReboundsPerGame(6.2); p1.setStealsPerGame(2.3); p1.setBlocksPerGame(0.8);
         p1.setPosition(PlayerPosition.SHOOTING_GUARD); p1.setSkillLevel("Legendary"); p1.setTeam(lions);
         playerService.savePlayer(p1);
 
         Player p2 = new Player();
         p2.setName("LeBron James"); p2.setJerseyNumber(6); p2.setPointsPerGame(27.1);
+        p2.setAssistsPerGame(7.4); p2.setReboundsPerGame(7.5); p2.setStealsPerGame(1.6); p2.setBlocksPerGame(0.8);
         p2.setPosition(PlayerPosition.SMALL_FORWARD); p2.setSkillLevel("GOAT Candidate"); p2.setTeam(lions);
         playerService.savePlayer(p2);
 
         Player p3 = new Player();
         p3.setName("Tim Duncan"); p3.setJerseyNumber(21); p3.setPointsPerGame(19.0);
+        p3.setAssistsPerGame(3.0); p3.setReboundsPerGame(10.8); p3.setStealsPerGame(0.7); p3.setBlocksPerGame(2.2);
         p3.setPosition(PlayerPosition.POWER_FORWARD); p3.setSkillLevel("Fundamental"); p3.setTeam(eagles);
         playerService.savePlayer(p3);
 
         Player p4 = new Player();
         p4.setName("Stephen Curry"); p4.setJerseyNumber(30); p4.setPointsPerGame(24.3);
+        p4.setAssistsPerGame(6.5); p4.setReboundsPerGame(4.6); p4.setStealsPerGame(1.7); p4.setBlocksPerGame(0.2);
         p4.setPosition(PlayerPosition.POINT_GUARD); p4.setSkillLevel("Best Shooter Ever"); p4.setTeam(eagles);
         playerService.savePlayer(p4);
 

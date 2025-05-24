@@ -17,7 +17,62 @@
             </div>
         </div>
 
-        <h2 class="text-center mb-4 display-6">Key Features</h2>
+        <div sec:authorize="isAuthenticated()" class="dashboard-section"> <h2 class="text-center mb-4 display-6 border-bottom pb-2">Manager's Dashboard</h2>
+            <div class="row g-4 mb-4"> 
+      
+                <div class="col-lg-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header bg-dark text-white"><i class="bi bi-calendar-week"></i> Next 3 Upcoming Games</div>
+                        <div class="card-body p-0">
+                            <div th:if="${!#lists.isEmpty(upcomingGames)}" class="list-group list-group-flush">
+                                <a th:each="game : ${upcomingGames}" th:href="@{'/games/' + ${game.id}}" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1" th:text="${game.homeTeam.name + ' vs ' + game.awayTeam.name}"></h6>
+                                        <small th:text="${#temporals.format(game.gameDateTime, 'dd MMM, HH:mm')}"></small>
+                                    </div>
+                                    <p class="mb-1 small text-muted" th:text="${game.location != null ? game.location : 'Location TBD'}"></p>
+                                </a>
+                            </div>
+                            <div th:if="${#lists.isEmpty(upcomingGames)}" class="alert alert-light text-center m-3">
+                                No upcoming games scheduled. <a th:href="@{/games/new}" class="alert-link">Schedule one!</a>
+                            </div>
+                        </div>
+                         <div class="card-footer text-center" th:if="${!#lists.isEmpty(upcomingGames)}">
+                            <a th:href="@{/games/}" class="btn btn-outline-primary btn-sm">View All Games</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header bg-info text-white"><i class="bi bi-trophy"></i> Top 3 Teams</div>
+                        <div class="card-body p-0">
+                            <div th:if="${!#lists.isEmpty(topTeams)}" class="list-group list-group-flush">
+                                <a th:each="standing, iterStat : ${topTeams}" th:href="@{'/teams/' + ${standing.team.id}}" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1"><span th:text="${iterStat.count + '. '}"></span><span th:text="${standing.team.name}"></span></h6>
+                                        <small class="text-muted" th:text="${standing.wins + 'W - ' + standing.losses + 'L'}"></small>
+                                    </div>
+                                    <p class="mb-1 small">
+                                        Win %: <span th:text="${#numbers.formatDecimal(standing.winPercentage, 1, 1) + '%'}"></span>
+                                    </p>
+                                </a>
+                            </div>
+                             <div th:if="${#lists.isEmpty(topTeams)}" class="alert alert-light text-center m-3">
+                                No standings available yet. Results from played games will appear here.
+                            </div>
+                        </div>
+                        <div class="card-footer text-center" th:if="${!#lists.isEmpty(topTeams)}">
+                             <a th:href="@{/teams/standings}" class="btn btn-outline-info btn-sm">View Full Standings</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <h2 class="text-center mb-4 display-6 border-bottom pb-2">Key Features</h2>
+        
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 text-center">
             <div class="col">
                 <div class="card feature-card h-100 p-4">

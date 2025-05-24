@@ -18,7 +18,7 @@
                 <p class="small text-muted">ID: <span th:text="${team.id}"></span></p>
                 <div class="mt-3" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
                     <a th:href="@{'/teams/' + ${team.id} + '/edit'}" class="btn btn-primary btn-sm me-1"><i class="bi bi-pencil-fill"></i> Edit Team</a>
-                    <button type="button" class="btn btn-danger btn-sm me-1"
+                     <button type="button" class="btn btn-danger btn-sm me-1"
                             data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
                             th:attr="data-delete-url=@{'/teams/' + ${team.id} + '/delete'}, data-item-name=${team.name}">
                         <i class="bi bi-trash-fill"></i> Delete Team
@@ -32,22 +32,29 @@
             <div class="col-md-8">
                 <div class="card shadow-sm">
                     <div class="card-header"><i class="bi bi-person-badge"></i> Players (<span th:text="${#lists.size(team.players)}">0</span>)</div>
-                    <div class="card-body p-0"> <ul class="list-group list-group-flush" th:if="${team.players != null and not #lists.isEmpty(team.players)}">
+                    <div class="card-body p-0">
+                         <ul class="list-group list-group-flush" th:if="${team.players != null and not #lists.isEmpty(team.players)}">
                             <li class="list-group-item" th:each="player : ${team.players}">
                                 <div class="player-card">
                                     <div class="jersey" th:text="${player.jerseyNumber}">#</div>
                                     <div class="flex-grow-1">
                                         <h6 class="mb-0" th:text="${player.name}">Player Name</h6>
                                         <small class="text-muted" th:text="${player.position != null ? player.position.fullName : 'N/A'}">Position</small>
-                                        <span class="badge bg-info ms-2" th:text="${player.skillLevel}">Skill</span>
-                                        <span class="badge bg-success ms-1" th:text="${player.pointsPerGame + ' PPG'}">PPG</span>
+                                        <div class="mt-1">
+                                            <span class="badge bg-primary me-1" th:text="'PPG: ' + ${player.pointsPerGame}"></span>
+                                            <span class="badge bg-secondary me-1" th:text="'APG: ' + ${player.assistsPerGame}"></span>
+                                            <span class="badge bg-success me-1" th:text="'RPG: ' + ${player.reboundsPerGame}"></span>
+                                            <span class="badge bg-warning text-dark me-1" th:text="'SPG: ' + ${player.stealsPerGame}"></span>
+                                            <span class="badge bg-danger me-1" th:text="'BPG: ' + ${player.blocksPerGame}"></span>
+                                            <span class="badge bg-info" th:text="${player.skillLevel}"></span>
+                                        </div>
                                     </div>
                                     <div class="btn-group" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
                                         <a th:href="@{'/players/' + ${player.id} + '/edit'}" class="btn btn-sm btn-outline-primary" title="Edit Player"><i class="bi bi-pencil"></i></a>
                                         <button type="button" class="btn btn-sm btn-outline-danger" title="Delete Player"
                                                 data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
                                                 th:attr="data-delete-url=@{'/players/' + ${player.id} + '/delete'}, data-item-name=${player.name}">
-                                            <i class="bi bi-trash"></i> Delete
+                                            <i class="bi bi-trash"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -64,7 +71,7 @@
             <div class="col-md-4">
                 <div class="card shadow-sm">
                     <div class="card-header"><i class="bi bi-person-check-fill"></i> Team Members (Users) (<span th:text="${#lists.size(team.members)}">0</span>)</div>
-                    <div class="card-body p-0">
+                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush" th:if="${team.members != null and not #lists.isEmpty(team.members)}">
                             <li class="list-group-item" th:each="member : ${team.members}">
                                 <i class="bi bi-person-circle me-2"></i> <span th:text="${member.username}"></span>
@@ -72,7 +79,7 @@
                         </ul>
                         <div class="alert alert-light text-center m-3" th:if="${team.members == null or #lists.isEmpty(team.members)}">
                             No members (users) assigned to this team.
-                            <a th:href="@{'/teams/' + ${team.id} + '/edit'}" class="alert-link" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">Assign some!</a>
+                             <a th:href="@{'/teams/' + ${team.id} + '/edit'}" class="alert-link" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">Assign some!</a>
                         </div>
                     </div>
                 </div>

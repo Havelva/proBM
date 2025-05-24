@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{layout :: head(title='Game Details')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+
+<div class="container mt-4" th:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1><i class="bi bi-file-earmark-text-fill"></i> Game Details</h1>
+        <a th:href="@{/games/}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left-circle"></i> Back to Games List</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center"
+             th:classappend="${game.played ? 'bg-success' : 'bg-warning'} + ' text-white'">
+            <span>
+                <i th:class="${game.played ? 'bi bi-check-circle-fill' : 'bi bi-hourglass-split'}"></i>
+                <span th:text="${#temporals.format(game.gameDateTime, 'EEEE, dd MMMM yyyy ''at'' HH:mm')}">Game Date & Time</span>
+            </span>
+             <span th:text="${game.played ? 'FINAL' : 'UPCOMING'}" class="badge bg-light text-dark fs-6">Status</span>
+        </div>
+        <div class="card-body">
+            <div class="text-center mb-4">
+                <h2 class="display-5">
+                    <a th:href="@{'/teams/' + ${game.homeTeam.id}}" class="text-decoration-none" th:text="${game.homeTeam.name}">Home Team</a>
+                    <span class="mx-3" th:text="${game.played ? game.homeTeamScore : 'vs'}"></span>
+                    <a th:href="@{'/teams/' + ${game.awayTeam.id}}" class="text-decoration-none" th:text="${game.awayTeam.name}">Away Team</a>
+                </h2>
+                <h4 th:if="${game.played}" class="text-muted">
+                   (<span th:text="${game.homeTeamScore}"></span> - <span th:text="${game.awayTeamScore}"></span>)
+                </h4>
+            </div>
+
+            <dl class="row">
+                <dt class="col-sm-3">Game ID</dt>
+                <dd class="col-sm-9" th:text="${game.id}"></dd>
+
+                <dt class="col-sm-3">Date & Time</dt>
+                <dd class="col-sm-9" th:text="${#temporals.format(game.gameDateTime, 'dd-MM-yyyy HH:mm')}"></dd>
+
+                <dt class="col-sm-3">Location</dt>
+                <dd class="col-sm-9" th:text="${game.location != null ? game.location : 'Not Specified'}"></dd>
+
+                <dt class="col-sm-3">Home Team</dt>
+                <dd class="col-sm-9" th:text="${game.homeTeam.name}"></dd>
+
+                <dt class="col-sm-3">Away Team</dt>
+                <dd class="col-sm-9" th:text="${game.awayTeam.name}"></dd>
+
+                <dt class="col-sm-3" th:if="${game.played}">Result</dt>
+                <dd class="col-sm-9" th:if="${game.played}">
+                    <span th:text="${game.homeTeamScore + ' - ' + game.awayTeamScore}"></span>
+                    <span th:if="${game.homeTeamScore > game.awayTeamScore}" th:text="' (' + ${game.homeTeam.name} + ' wins!)'" class="text-success fw-bold"></span>
+                    <span th:if="${game.awayTeamScore > game.homeTeamScore}" th:text="' (' + ${game.awayTeam.name} + ' wins!)'" class="text-success fw-bold"></span>
+                    <span th:if="${game.homeTeamScore == game.awayTeamScore}" th:text="' (Draw!)'" class="text-warning fw-bold"></span>
+                </dd>
+
+                 <dt class="col-sm-3" th:unless="${game.played}">Status</dt>
+                 <dd class="col-sm-9" th:unless="${game.played}">Upcoming</dd>
+            </dl>
+        </div>
+         <div class="card-footer text-end bg-light" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+            <a class="btn btn-primary btn-sm me-2" th:href="@{'/games/' + ${game.id} + '/edit'}"><i class="bi bi-pencil-square"></i> Edit / Add Score</a>
+            <button type="button" class="btn btn-danger btn-sm"
+                    data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
+                    th:attr="data-delete-url=@{'/games/' + ${game.id} + '/delete'}, data-item-name='Game ' + ${game.homeTeam.name} + ' vs ' + ${game.awayTeam.name}">
+                <i class="bi bi-trash-fill"></i> Delete Game
+            </button>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{layout :: deleteModal}"></div>
+<div th:replace="~{layout :: page_scripts}"></div>
+</body>
+</html>

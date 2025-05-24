@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head(title=${title})}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+
+<div class="container mt-4" th:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <i th:class="${game.id != null ? 'bi bi-pencil-square' : 'bi bi-calendar-plus-fill'}"></i>
+                    <span th:text="${title}">Schedule/Edit Game</span>
+                </div>
+                <div class="card-body">
+                    <form method="post" th:action="@{/games/save}" th:object="${game}">
+                        <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:field="*{played}"> <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="homeTeam" class="form-label">Home Team</label>
+                                <select class="form-select" id="homeTeam" th:field="*{homeTeam}" required
+                                        th:classappend="${#fields.hasErrors('homeTeam')} ? 'is-invalid' : ''">
+                                    <option value="">-- Select Home Team --</option>
+                                    <option th:each="team : ${allTeams}"
+                                            th:value="${team.id}"
+                                            th:text="${team.name}"
+                                            th:selected="${game.homeTeam != null and game.homeTeam.id == team.id}"></option>
+                                </select>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('homeTeam')}" th:errors="*{homeTeam}">Home Team Error</div>
+                            </div>
+                             <div class="col-md-6 mb-3">
+                                <label for="awayTeam" class="form-label">Away Team</label>
+                                <select class="form-select" id="awayTeam" th:field="*{awayTeam}" required
+                                        th:classappend="${#fields.hasErrors('awayTeam')} ? 'is-invalid' : ''">
+                                    <option value="">-- Select Away Team --</option>
+                                    <option th:each="team : ${allTeams}"
+                                            th:value="${team.id}"
+                                            th:text="${team.name}"
+                                            th:selected="${game.awayTeam != null and game.awayTeam.id == team.id}"></option>
+                                </select>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('awayTeam')}" th:errors="*{awayTeam}">Away Team Error</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="gameDateTime" class="form-label">Game Date & Time</label>
+                            <input type="datetime-local" class="form-control" id="gameDateTime" th:field="*{gameDateTime}" required
+                                   th:classappend="${#fields.hasErrors('gameDateTime')} ? 'is-invalid' : ''">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('gameDateTime')}" th:errors="*{gameDateTime}">Date/Time Error</div>
+                        </div>
+
+                         <div class="mb-3">
+                            <label for="location" class="form-label">Location (Optional)</label>
+                            <input type="text" class="form-control" id="location" th:field="*{location}" placeholder="e.g., Home Arena, Neutral Site">
+                        </div>
+
+                        <h5 class="mt-4">Enter Score (if played)</h5>
+                        <div class="row">
+                             <div class="col-md-6 mb-3">
+                                <label for="homeTeamScore" class="form-label">Home Team Score</label>
+                                <input type="number" class="form-control" id="homeTeamScore" th:field="*{homeTeamScore}" min="0">
+                             </div>
+                              <div class="col-md-6 mb-3">
+                                <label for="awayTeamScore" class="form-label">Away Team Score</label>
+                                <input type="number" class="form-control" id="awayTeamScore" th:field="*{awayTeamScore}" min="0">
+                             </div>
+                        </div>
+
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a th:href="@{/games/}" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Cancel</a>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-save-fill"></i> Save Game</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

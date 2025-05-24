@@ -15,8 +15,6 @@
                 <div class="card-body">
                     <form method="post" th:action="@{/players/save}" th:object="${player}">
                         <input type="hidden" th:field="*{id}">
-                        <!-- Conditionally show team.id input. If team is pre-selected (e.g. from team details page), keep it hidden. -->
-                        <!-- If adding a general player (teamName is null), this field will be populated by the select dropdown -->
                         <input type="hidden" th:if="${teamName != null && player.team != null}" th:field="*{team.id}">
 
                         <div class="mb-3">
@@ -46,8 +44,6 @@
                             </div>
                         </div>
 
-                        <!-- Team Selection Dropdown - Show if teamName is not provided (i.e., general player add/edit) -->
-                        <!-- or if editing and allTeams is available -->
                         <div class="mb-3" th:if="${teamName == null or player.id != null}">
                             <label for="team" class="form-label">Team</label>
                             <select class="form-select" id="team" th:field="*{team}" required
@@ -61,18 +57,48 @@
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('team')}" th:errors="*{team}">Team Error</div>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="skillLevel" class="form-label">Skill Level</label>
+                            <input type="text" class="form-control" id="skillLevel" th:field="*{skillLevel}" placeholder="e.g., Pro, Amateur, Rookie" required
+                                   th:classappend="${#fields.hasErrors('skillLevel')} ? 'is-invalid' : ''">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('skillLevel')}" th:errors="*{skillLevel}">Skill Level Error</div>
+                        </div>
+
+                        <h5 class="mt-4">Player Statistics (Per Game)</h5>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="skillLevel" class="form-label">Skill Level</label>
-                                <input type="text" class="form-control" id="skillLevel" th:field="*{skillLevel}" placeholder="e.g., Pro, Amateur, Rookie" required
-                                       th:classappend="${#fields.hasErrors('skillLevel')} ? 'is-invalid' : ''">
-                                <div class="invalid-feedback" th:if="${#fields.hasErrors('skillLevel')}" th:errors="*{skillLevel}">Skill Level Error</div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="pointsPerGame" class="form-label">Points Per Game (PPG)</label>
+                                <label for="pointsPerGame" class="form-label">Points (PPG)</label>
                                 <input type="number" step="0.1" class="form-control" id="pointsPerGame" th:field="*{pointsPerGame}" required
                                        th:classappend="${#fields.hasErrors('pointsPerGame')} ? 'is-invalid' : ''">
                                 <div class="invalid-feedback" th:if="${#fields.hasErrors('pointsPerGame')}" th:errors="*{pointsPerGame}">PPG Error</div>
+                            </div>
+                             <div class="col-md-6 mb-3">
+                                <label for="assistsPerGame" class="form-label">Assists (APG)</label>
+                                <input type="number" step="0.1" class="form-control" id="assistsPerGame" th:field="*{assistsPerGame}" required
+                                       th:classappend="${#fields.hasErrors('assistsPerGame')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('assistsPerGame')}" th:errors="*{assistsPerGame}">APG Error</div>
+                            </div>
+                        </div>
+                         <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="reboundsPerGame" class="form-label">Rebounds (RPG)</label>
+                                <input type="number" step="0.1" class="form-control" id="reboundsPerGame" th:field="*{reboundsPerGame}" required
+                                       th:classappend="${#fields.hasErrors('reboundsPerGame')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('reboundsPerGame')}" th:errors="*{reboundsPerGame}">RPG Error</div>
+                            </div>
+                             <div class="col-md-6 mb-3">
+                                <label for="stealsPerGame" class="form-label">Steals (SPG)</label>
+                                <input type="number" step="0.1" class="form-control" id="stealsPerGame" th:field="*{stealsPerGame}" required
+                                       th:classappend="${#fields.hasErrors('stealsPerGame')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('stealsPerGame')}" th:errors="*{stealsPerGame}">SPG Error</div>
+                            </div>
+                        </div>
+                         <div class="row">
+                             <div class="col-md-6 mb-3">
+                                <label for="blocksPerGame" class="form-label">Blocks (BPG)</label>
+                                <input type="number" step="0.1" class="form-control" id="blocksPerGame" th:field="*{blocksPerGame}" required
+                                       th:classappend="${#fields.hasErrors('blocksPerGame')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('blocksPerGame')}" th:errors="*{blocksPerGame}">BPG Error</div>
                             </div>
                         </div>
 

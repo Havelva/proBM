@@ -51,12 +51,44 @@ public class Player {
     @Column(nullable = false)
     private Double pointsPerGame;
 
+    // New Fields for Detailed Statistics
+    @NotNull(message = "Assists per game is required.")
+    @DecimalMin(value = "0.0", message = "Assists per game must be zero or positive.")
+    @Column(nullable = false)
+    private Double assistsPerGame = 0.0; // Default to 0.0
+
+    @NotNull(message = "Rebounds per game is required.")
+    @DecimalMin(value = "0.0", message = "Rebounds per game must be zero or positive.")
+    @Column(nullable = false)
+    private Double reboundsPerGame = 0.0; // Default to 0.0
+
+    @NotNull(message = "Steals per game is required.")
+    @DecimalMin(value = "0.0", message = "Steals per game must be zero or positive.")
+    @Column(nullable = false)
+    private Double stealsPerGame = 0.0; // Default to 0.0
+
+    @NotNull(message = "Blocks per game is required.")
+    @DecimalMin(value = "0.0", message = "Blocks per game must be zero or positive.")
+    @Column(nullable = false)
+    private Double blocksPerGame = 0.0; // Default to 0.0
+
+
     @NotNull(message = "Player must be associated with a team.")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
-    // Getters and Setters
+    // Getters and Setters for New Fields
+    public Double getAssistsPerGame() { return assistsPerGame; }
+    public void setAssistsPerGame(Double assistsPerGame) { this.assistsPerGame = assistsPerGame; }
+    public Double getReboundsPerGame() { return reboundsPerGame; }
+    public void setReboundsPerGame(Double reboundsPerGame) { this.reboundsPerGame = reboundsPerGame; }
+    public Double getStealsPerGame() { return stealsPerGame; }
+    public void setStealsPerGame(Double stealsPerGame) { this.stealsPerGame = stealsPerGame; }
+    public Double getBlocksPerGame() { return blocksPerGame; }
+    public void setBlocksPerGame(Double blocksPerGame) { this.blocksPerGame = blocksPerGame; }
+
+    // Existing Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

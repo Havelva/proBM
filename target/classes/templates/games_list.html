@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{layout :: head(title='Game Schedule & Results')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+
+<div class="container mt-4" th:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="bi bi-calendar-event-fill"></i> Game Schedule & Results</h1>
+        <a class="btn btn-success" th:href="@{/games/new}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+            <i class="bi bi-plus-circle-fill"></i> Schedule New Game
+        </a>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white"><i class="bi bi-clock-history"></i> Upcoming Games</div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Matchup</th>
+                        <th>Location</th>
+                        <th sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="game : ${upcomingGames}">
+                        <td th:text="${#temporals.format(game.gameDateTime, 'dd MMM yyyy, HH:mm')}"></td>
+                        <td>
+                            <a th:href="@{'/teams/' + ${game.homeTeam.id}}" th:text="${game.homeTeam.name}">Home</a>
+                            vs
+                            <a th:href="@{'/teams/' + ${game.awayTeam.id}}" th:text="${game.awayTeam.name}">Away</a>
+                        </td>
+                        <td th:text="${game.location != null ? game.location : 'TBD'}"></td>
+                        <td sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+                            <a th:href="@{'/games/' + ${game.id} + '/edit'}" class="btn btn-sm btn-outline-primary me-1" title="Edit/Add Score"><i class="bi bi-pencil"></i></a>
+                            <button type="button" class="btn btn-sm btn-outline-danger" title="Delete Game"
+                                    data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
+                                    th:attr="data-delete-url=@{'/games/' + ${game.id} + '/delete'}, data-item-name='Game ' + ${game.homeTeam.name} + ' vs ' + ${game.awayTeam.name}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(upcomingGames)}">
+                        <td colspan="4" class="text-center text-muted py-3">No upcoming games scheduled.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white"><i class="bi bi-check2-square"></i> Played Games (Results)</div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Date</th>
+                        <th>Home Team</th>
+                        <th>Score</th>
+                        <th>Away Team</th>
+                        <th>Location</th>
+                         <th sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="game : ${playedGames}">
+                        <td th:text="${#temporals.format(game.gameDateTime, 'dd MMM yyyy')}"></td>
+                        <td th:text="${game.homeTeam.name}" th:classappend="${game.homeTeamScore > game.awayTeamScore ? 'fw-bold' : ''}"></td>
+                        <td>
+                           <span th:text="${game.homeTeamScore}" th:classappend="${game.homeTeamScore > game.awayTeamScore ? 'fw-bold text-success' : ''}"></span>
+                           -
+                           <span th:text="${game.awayTeamScore}" th:classappend="${game.awayTeamScore > game.homeTeamScore ? 'fw-bold text-success' : ''}"></span>
+                        </td>
+                        <td th:text="${game.awayTeam.name}" th:classappend="${game.awayTeamScore > game.homeTeamScore ? 'fw-bold' : ''}"></td>
+                        <td th:text="${game.location}"></td>
+                         <td sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+                            <a th:href="@{'/games/' + ${game.id} + '/edit'}" class="btn btn-sm btn-outline-secondary me-1" title="Edit Score"><i class="bi bi-pencil"></i></a>
+                         </td>
+                    </tr>
+                     <tr th:if="${#lists.isEmpty(playedGames)}">
+                        <td colspan="6" class="text-center text-muted py-3">No games have been played yet.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{layout :: deleteModal}"></div>
+<div th:replace="~{layout :: page_scripts}"></div>
+</body>
+</html>

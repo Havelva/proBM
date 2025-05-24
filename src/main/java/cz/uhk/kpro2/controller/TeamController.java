@@ -2,7 +2,6 @@ package cz.uhk.kpro2.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import cz.uhk.kpro2.model.Coach;
 import cz.uhk.kpro2.model.Team;
 import cz.uhk.kpro2.model.User;
 import cz.uhk.kpro2.service.CoachService;
@@ -45,7 +43,7 @@ public class TeamController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("authName", authentication != null && authentication.isAuthenticated() && !"anonymousUser".equals(authentication.getName()) ? authentication.getName() : null);
         model.addAttribute("coaches", coachService.getAllCoaches());
-        model.addAttribute("allUsers", userService.getAllUsers()); // Renamed to avoid conflict with 'user' in register form
+        model.addAttribute("allUsers", userService.getAllUsers());
     }
 
     @GetMapping("/")
@@ -101,19 +99,18 @@ public class TeamController {
             return "teams_form";
         }
 
-        // Handle members
         List<User> members = new ArrayList<>();
         if (memberIds != null && !memberIds.isEmpty()) {
             for (Long memberId : memberIds) {
-                User member = userService.getUser(memberId); // Assuming userService.getUser(id) exists and returns a User
+                User member = userService.getUser(memberId); 
                 if (member != null) {
                     members.add(member);
                 }
             }
         }
-        team.setMembers(members); // Assuming Team class has a setMembers(List<User> members) method
+        team.setMembers(members); 
 
-        teamService.saveTeam(team); // Corrected call to match TeamService interface
+        teamService.saveTeam(team); 
         redirectAttributes.addFlashAttribute("successMessage", "Team '" + team.getName() + "' saved successfully.");
         return "redirect:/teams/";
     }
@@ -123,17 +120,24 @@ public class TeamController {
         Team team = teamService.getTeam(id);
         if (team != null) {
             try {
-                // Consider any pre-deletion logic, e.g., disassociating players or checking if the team can be deleted.
-                // For now, directly deleting.
                 teamService.deleteTeam(id);
                 redirectAttributes.addFlashAttribute("successMessage", "Team '" + team.getName() + "' deleted successfully.");
             } catch (Exception e) {
-                // Log the exception e.g., e.printStackTrace();
                 redirectAttributes.addFlashAttribute("errorMessage", "Error deleting team: " + e.getMessage());
+                 e.printStackTrace(); // Good for debugging
             }
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "Team not found.");
         }
         return "redirect:/teams/";
+    }
+
+    // New endpoint for team standings
+    @GetMapping("/standings")
+    public String showStandings(Model model) {
+        addCommonAttributes(model); // For authName, if needed, or other common data
+        model.addAttribute("standings", teamService.getTeamStandings());
+        model.addAttribute("title", "Team Standings");
+        return "team_standings"; // We will create this template
     }
 }
