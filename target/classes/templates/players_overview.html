@@ -57,7 +57,7 @@
                         </a>
                         <button type="button" class="btn btn-sm btn-outline-danger" title="Delete Player"
                                 data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
-                                th:attr="data-delete-url=@{'/players/{id}/delete(id=${player.id})}, data-item-name=${player.name}">
+                                th:attr="data-delete-url=@{'/players/{id}/delete?origin=overview'(id=${player.id})}, data-item-name=${player.name}">
                             <i class="bi bi-trash"></i> <span class="d-none d-md-inline">Delete</span>
                         </button>
                     </td>

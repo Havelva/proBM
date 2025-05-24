@@ -179,7 +179,9 @@ public class PlayerController {
     }
 
     @PostMapping("/{id}/delete")
-    public String deletePlayerConfirm(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+    public String deletePlayerConfirm(@PathVariable Long id, 
+                                      @RequestParam(required = false) String origin,
+                                      RedirectAttributes redirectAttributes) {
         Player player = playerService.getPlayer(id);
         if (player != null) {
             String playerName = player.getName();
@@ -188,10 +190,13 @@ public class PlayerController {
             playerService.deletePlayer(id);
             redirectAttributes.addFlashAttribute("successMessage", "Player '" + playerName + "' deleted successfully!");
             
+            if ("overview".equals(origin)) {
+                return "redirect:/players/"; // Redirect to all players list if deleted from overview
+            }
             if (teamId != null) {
                  return "redirect:/teams/" + teamId; // Redirect to team details if player had a team
             }
-            return "redirect:/players/"; // Otherwise, redirect to all players list
+            return "redirect:/players/"; // Default redirect to all players list
         }
         redirectAttributes.addFlashAttribute("errorMessage", "Player not found or could not be deleted.");
         return "redirect:/players/";
