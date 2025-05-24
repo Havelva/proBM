@@ -1,5 +1,7 @@
 package cz.uhk.kpro2.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +20,7 @@ import cz.uhk.kpro2.model.Player;
 import cz.uhk.kpro2.model.Team;
 import cz.uhk.kpro2.service.PlayerService;
 import cz.uhk.kpro2.service.TeamService;
-import jakarta.validation.Valid;
+import jakarta.validation.Valid; // Ensure List is imported
 
 @Controller
 @RequestMapping("/players")
@@ -33,21 +35,19 @@ public class PlayerController {
         this.teamService = teamService;
     }
 
-    // New method to list all players
-    @GetMapping("/")
-    public String listAllPlayers(Model model) {
-        addAuthNameToModel(model);
-        model.addAttribute("players", playerService.getAllPlayers());
-        model.addAttribute("title", "All Players");
-        return "players_overview"; // We'll create this template next
-    }
-
     private void addAuthNameToModel(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("authName", authentication != null && authentication.isAuthenticated() && !"anonymousUser".equals(authentication.getName()) ? authentication.getName() : null);
     }
 
-     // Optional: If you want a separate list of players for a team
+    @GetMapping("/")
+    public String listAllPlayers(Model model) {
+        addAuthNameToModel(model);
+        model.addAttribute("players", playerService.getAllPlayers());
+        model.addAttribute("title", "All Players");
+        return "players_overview";
+    }
+
     @GetMapping("/list")
     public String listPlayersForTeam(@RequestParam Long teamId, Model model, RedirectAttributes redirectAttributes) {
         addAuthNameToModel(model);
@@ -74,67 +74,74 @@ public class PlayerController {
         Player player = new Player();
         player.setTeam(team);
         model.addAttribute("player", player);
-        model.addAttribute("teamName", team.getName()); // Keep this for the form
-        model.addAttribute("title", "Add Player to " + team.getName()); // Title for the page
-        model.addAttribute("allTeams", teamService.getAllTeams()); // Add all teams for consistency, though not used when teamId is present
+        model.addAttribute("teamName", team.getName());
+        model.addAttribute("title", "Add Player to " + team.getName());
+        model.addAttribute("allTeams", teamService.getAllTeams());
         return "players_form";
     }
 
-    // New GET mapping for adding a player from the general players overview page
     @GetMapping("/new_general")
     public String newPlayerGeneral(Model model) {
         addAuthNameToModel(model);
         Player player = new Player();
         model.addAttribute("player", player);
-        model.addAttribute("allTeams", teamService.getAllTeams()); // For selecting a team
+        model.addAttribute("allTeams", teamService.getAllTeams());
         model.addAttribute("title", "Add New Player");
-        // teamName will be null here, players_form.html will need to handle this
         return "players_form";
     }
 
     @PostMapping("/save")
     public String savePlayer(@Valid @ModelAttribute Player player, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-        // Team handling:
-        // If player.team.id is null, it means we are likely coming from new_general
-        // and team selection should have happened in the form.
-        // If player.team.id is NOT null, it means team was pre-set (e.g. "Add player to team X")
-        // or selected in the form during an edit.
-
-        Long teamId = (player.getTeam() != null) ? player.getTeam().getId() : null;
+        Long teamId = (player.getTeam() != null && player.getTeam().getId() != null) ? player.getTeam().getId() : null;
 
         if (teamId == null) {
-            // This case implies a new player from /new_general where team selection is mandatory in the form
-            // or an edit where the team was somehow removed (which shouldn't happen with current form).
-            // The th:field="*{team}" in the select dropdown (to be added) should bind team.id.
-            // If it's still null, it means no selection was made.
-            bindingResult.rejectValue("team", "error.player", "A team must be selected for the player.");
+            // This check ensures that if the team object itself is null OR its ID is null, we flag it.
+            // The @NotNull on player.team in Player.java handles the case where player.team is null,
+            // but this explicit check for teamId handles cases where team object might exist but without an ID.
+            if (!bindingResult.hasFieldErrors("team")) { // Avoid adding duplicate error if @NotNull already caught it
+                 bindingResult.rejectValue("team", "error.player", "A team must be selected for the player.");
+            }
         } else {
             Team team = teamService.getTeam(teamId);
             if (team == null) {
                 bindingResult.rejectValue("team", "error.player", "Selected team not found.");
             } else {
                 player.setTeam(team); // Ensure the full team object is set
+
+                // **Unique Jersey Number Validation within the team**
+                if (player.getJerseyNumber() != null) {
+                    List<Player> teammates = playerService.getPlayersByTeamId(teamId);
+                    for (Player teammate : teammates) {
+                        // If we are editing an existing player, don't compare them to themselves
+                        if (player.getId() != null && teammate.getId().equals(player.getId())) {
+                            continue;
+                        }
+                        if (teammate.getJerseyNumber().equals(player.getJerseyNumber())) {
+                            bindingResult.rejectValue("jerseyNumber", "error.player", "Jersey number " + player.getJerseyNumber() + " is already taken on this team.");
+                            break;
+                        }
+                    }
+                }
             }
         }
 
         if (bindingResult.hasErrors()) {
             addAuthNameToModel(model);
-            model.addAttribute("allTeams", teamService.getAllTeams()); // Always provide allTeams if there are errors
+            model.addAttribute("allTeams", teamService.getAllTeams());
 
-            if (player.getTeam() != null && player.getTeam().getId() != null && player.getTeam().getName() != null) {
-                model.addAttribute("teamName", player.getTeam().getName());
-                model.addAttribute("title", player.getId() != null ? "Edit Player: " + player.getName() : "Add Player to " + player.getTeam().getName());
-            } else if (player.getTeam() != null && player.getTeam().getId() != null) {
-                // If team name is not populated yet, fetch it
-                Team currentTeam = teamService.getTeam(player.getTeam().getId());
-                if (currentTeam != null) {
+            // Re-populate title and teamName correctly for the form
+            if (player.getTeam() != null && player.getTeam().getId() != null) {
+                 Team currentTeam = player.getTeam(); // If team object is already populated (even if just ID)
+                 if (currentTeam.getName() == null) { // Fetch full team if name is missing
+                     currentTeam = teamService.getTeam(currentTeam.getId());
+                 }
+                 if(currentTeam != null){
                     model.addAttribute("teamName", currentTeam.getName());
                     model.addAttribute("title", player.getId() != null ? "Edit Player: " + player.getName() : "Add Player to " + currentTeam.getName());
-                } else {
-                     model.addAttribute("title", player.getId() != null ? "Edit Player: " + player.getName() : "Add New Player");
-                }
-            }
-             else {
+                 } else { // Fallback if team somehow becomes null
+                    model.addAttribute("title", player.getId() != null ? "Edit Player: " + player.getName() : "Add New Player");
+                 }
+            } else {
                 model.addAttribute("title", player.getId() != null ? "Edit Player: " + player.getName() : "Add New Player");
             }
             return "players_form";
@@ -144,12 +151,9 @@ public class PlayerController {
         playerService.savePlayer(player);
         redirectAttributes.addFlashAttribute("successMessage", "Player '" + player.getName() + "' " + (isNew ? "added" : "updated") + " successfully!");
         
-        // If the team is set, redirect to the team details page, otherwise to the players overview.
         if (player.getTeam() != null && player.getTeam().getId() != null) {
             return "redirect:/teams/" + player.getTeam().getId();
         } else {
-            // This case should ideally not be hit if validation for team selection is robust.
-            // However, as a fallback, redirect to general players list.
             return "redirect:/players/";
         }
     }
@@ -163,12 +167,11 @@ public class PlayerController {
             return "redirect:/players/";
         }
         model.addAttribute("player", player);
-        model.addAttribute("allTeams", teamService.getAllTeams()); // For potential future use (changing team)
+        model.addAttribute("allTeams", teamService.getAllTeams()); 
 
-        // Set title and teamName for the form
         if (player.getTeam() != null) {
-            model.addAttribute("teamName", player.getTeam().getName());
-            model.addAttribute("title", "Edit Player: " + player.getName() + " (" + player.getTeam().getName() + ")");
+            model.addAttribute("teamName", player.getTeam().getName()); // teamName used in the form's conditional hidden field
+            model.addAttribute("title", "Edit Player: " + player.getName() + " (Team: " + player.getTeam().getName() + ")");
         } else {
             model.addAttribute("title", "Edit Player: " + player.getName());
         }
@@ -179,16 +182,18 @@ public class PlayerController {
     public String deletePlayerConfirm(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         Player player = playerService.getPlayer(id);
         if (player != null) {
-            // Long teamId = player.getTeam() != null ? player.getTeam().getId() : null; // Player might not have a team
             String playerName = player.getName();
+            Long teamId = player.getTeam() != null ? player.getTeam().getId() : null;
+            
             playerService.deletePlayer(id);
             redirectAttributes.addFlashAttribute("successMessage", "Player '" + playerName + "' deleted successfully!");
-            // if (teamId != null) {
-            // return "redirect:/teams/" + teamId;
-            // }
-            return "redirect:/players/"; // Redirect to all players list
+            
+            if (teamId != null) {
+                 return "redirect:/teams/" + teamId; // Redirect to team details if player had a team
+            }
+            return "redirect:/players/"; // Otherwise, redirect to all players list
         }
         redirectAttributes.addFlashAttribute("errorMessage", "Player not found or could not be deleted.");
-        return "redirect:/players/"; // Fallback redirect
+        return "redirect:/players/";
     }
 }
