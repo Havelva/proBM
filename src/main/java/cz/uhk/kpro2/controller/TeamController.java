@@ -93,24 +93,38 @@ public class TeamController {
                            Model model,
                            RedirectAttributes redirectAttributes) {
 
+        // If coach ID is null (e.g., "-- Select Coach --" was chosen), set the coach object to null.
+        if (team.getCoach() != null && team.getCoach().getId() == null) {
+            team.setCoach(null);
+        }
+
         if (bindingResult.hasErrors()) {
             addCommonAttributes(model);
             model.addAttribute("title", team.getId() != null ? "Edit Team: " + team.getName() : "Create New Team");
+            // Ensure users are re-populated for the form if there are errors
+            if (team.getId() != null) { // If editing an existing team, reload its members for display
+                Team existingTeam = teamService.getTeam(team.getId());
+                if (existingTeam != null) {
+                    model.addAttribute("memberIds", existingTeam.getMembers().stream().map(User::getId).toList());
+                }
+            } else if (memberIds != null) { // If creating, retain selected members
+                 model.addAttribute("memberIds", memberIds);
+            }
             return "teams_form";
         }
 
         List<User> members = new ArrayList<>();
         if (memberIds != null && !memberIds.isEmpty()) {
             for (Long memberId : memberIds) {
-                User member = userService.getUser(memberId); 
+                User member = userService.getUser(memberId);
                 if (member != null) {
                     members.add(member);
                 }
             }
         }
-        team.setMembers(members); 
+        team.setMembers(members);
 
-        teamService.saveTeam(team); 
+        teamService.saveTeam(team);
         redirectAttributes.addFlashAttribute("successMessage", "Team '" + team.getName() + "' saved successfully.");
         return "redirect:/teams/";
     }
