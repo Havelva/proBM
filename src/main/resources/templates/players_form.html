@@ -31,7 +31,7 @@
                                         th:classappend="${#fields.hasErrors('position')} ? 'is-invalid' : ''">
                                      <option value="">-- Select Position --</option>
                                      <option th:each="pos : ${T(cz.uhk.kpro2.model.PlayerPosition).values()}"
-                                             th:value="${pos}"
+                                             th:value="${pos.name()}"
                                              th:text="${pos.fullName}"></option>
                                 </select>
                                 <div class="invalid-feedback" th:if="${#fields.hasErrors('position')}" th:errors="*{position}">Position Error</div>

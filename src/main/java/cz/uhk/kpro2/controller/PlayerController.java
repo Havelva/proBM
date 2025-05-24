@@ -74,8 +74,8 @@ public class PlayerController {
         Player player = new Player();
         player.setTeam(team);
         model.addAttribute("player", player);
-        model.addAttribute("teamName", team.getName());
-        model.addAttribute("title", "Add Player to " + team.getName());
+        model.addAttribute("teamName", team.getName()); // Keep this for the form
+        model.addAttribute("title", "Add Player to " + team.getName()); // Title for the page
         return "players_form";
     }
 
@@ -101,17 +101,22 @@ public class PlayerController {
 
         if (bindingResult.hasErrors()) {
             addAuthNameToModel(model);
-            // If team info was lost or not correctly set, try to re-fetch for the form title
+            // Set title and teamName for the form when returning due to errors
             if (player.getTeam() != null && player.getTeam().getId() != null) {
                  Team team = teamService.getTeam(player.getTeam().getId());
                  if(team != null) {
                     model.addAttribute("teamName", team.getName());
-                    model.addAttribute("title", player.getId() != null ? "Edit Player" : "Add Player to " + team.getName());
-                 } else {
-                     model.addAttribute("title", player.getId() != null ? "Edit Player" : "Add Player");
+                    model.addAttribute("title", player.getId() != null ? "Edit Player: " + player.getName() : "Add Player to " + team.getName());
+                 } else { // Should not happen if team.id is present, but as a fallback
+                     model.addAttribute("title", player.getId() != null ? "Edit Player: " + player.getName() : "Add Player");
                  }
             } else {
-                 model.addAttribute("title", player.getId() != null ? "Edit Player" : "Add Player");
+                 // If player.getTeam() or player.getTeam().getId() is null (e.g. new player without team preselected, though current flow doesn't support this)
+                 model.addAttribute("title", player.getId() != null ? "Edit Player: " + player.getName() : "Add Player");
+            }
+            // Ensure allTeams is available if editing, in case the form is extended to allow team changes
+            if (player.getId() != null) {
+                model.addAttribute("allTeams", teamService.getAllTeams());
             }
             return "players_form";
         }
@@ -126,15 +131,21 @@ public class PlayerController {
     public String editPlayer(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         addAuthNameToModel(model);
         Player player = playerService.getPlayer(id);
-        if (player == null) { // Removed player.getTeam() == null check for broader edit access
+        if (player == null) {
             redirectAttributes.addFlashAttribute("errorMessage", "Player not found.");
-            return "redirect:/players/"; // Redirect to the new all players list
+            return "redirect:/players/";
         }
         model.addAttribute("player", player);
-        // Add all teams to the model for a dropdown in the form
-        model.addAttribute("allTeams", teamService.getAllTeams());
-        model.addAttribute("title", "Edit Player: " + player.getName());
-        return "players_form"; // Assuming players_form can handle selecting/changing a team
+        model.addAttribute("allTeams", teamService.getAllTeams()); // For potential future use (changing team)
+
+        // Set title and teamName for the form
+        if (player.getTeam() != null) {
+            model.addAttribute("teamName", player.getTeam().getName());
+            model.addAttribute("title", "Edit Player: " + player.getName() + " (" + player.getTeam().getName() + ")");
+        } else {
+            model.addAttribute("title", "Edit Player: " + player.getName());
+        }
+        return "players_form";
     }
 
     @PostMapping("/{id}/delete")
