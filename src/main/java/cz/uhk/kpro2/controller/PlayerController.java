@@ -33,6 +33,15 @@ public class PlayerController {
         this.teamService = teamService;
     }
 
+    // New method to list all players
+    @GetMapping("/")
+    public String listAllPlayers(Model model) {
+        addAuthNameToModel(model);
+        model.addAttribute("players", playerService.getAllPlayers());
+        model.addAttribute("title", "All Players");
+        return "players_overview"; // We'll create this template next
+    }
+
     private void addAuthNameToModel(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("authName", authentication != null && authentication.isAuthenticated() && !"anonymousUser".equals(authentication.getName()) ? authentication.getName() : null);
@@ -73,7 +82,13 @@ public class PlayerController {
     @PostMapping("/save")
     public String savePlayer(@Valid @ModelAttribute Player player, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         // Ensure team is still valid and re-associate if necessary
+        // For a general player management, team might not be required initially,
+        // or selected from a dropdown. This logic might need adjustment
+        // if players can exist without a team or be assigned later.
         if (player.getTeam() == null || player.getTeam().getId() == null) {
+            // If creating/editing from a general players page, team might not be pre-selected.
+            // This validation might need to be conditional or handled differently.
+            // For now, let's assume a player must always have a team.
              bindingResult.rejectValue("team", "error.player", "Player must be associated with a team.");
         } else {
             Team team = teamService.getTeam(player.getTeam().getId());
@@ -111,27 +126,31 @@ public class PlayerController {
     public String editPlayer(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         addAuthNameToModel(model);
         Player player = playerService.getPlayer(id);
-        if (player == null || player.getTeam() == null) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Player or associated team not found.");
-            return "redirect:/teams/";
+        if (player == null) { // Removed player.getTeam() == null check for broader edit access
+            redirectAttributes.addFlashAttribute("errorMessage", "Player not found.");
+            return "redirect:/players/"; // Redirect to the new all players list
         }
         model.addAttribute("player", player);
-        model.addAttribute("teamName", player.getTeam().getName());
+        // Add all teams to the model for a dropdown in the form
+        model.addAttribute("allTeams", teamService.getAllTeams());
         model.addAttribute("title", "Edit Player: " + player.getName());
-        return "players_form";
+        return "players_form"; // Assuming players_form can handle selecting/changing a team
     }
 
     @PostMapping("/{id}/delete")
     public String deletePlayerConfirm(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         Player player = playerService.getPlayer(id);
-        if (player != null && player.getTeam() != null) {
-            Long teamId = player.getTeam().getId();
+        if (player != null) {
+            // Long teamId = player.getTeam() != null ? player.getTeam().getId() : null; // Player might not have a team
             String playerName = player.getName();
             playerService.deletePlayer(id);
             redirectAttributes.addFlashAttribute("successMessage", "Player '" + playerName + "' deleted successfully!");
-            return "redirect:/teams/" + teamId;
+            // if (teamId != null) {
+            // return "redirect:/teams/" + teamId;
+            // }
+            return "redirect:/players/"; // Redirect to all players list
         }
         redirectAttributes.addFlashAttribute("errorMessage", "Player not found or could not be deleted.");
-        return "redirect:/teams/"; // Fallback redirect
+        return "redirect:/players/"; // Fallback redirect
     }
 }

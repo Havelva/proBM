@@ -16,12 +16,17 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/register", "/login", "/css/**", "/js/**", "/home", "/", "/h2-console/**").permitAll()
-                // Admin can manage users and coaches
-                .requestMatchers(HttpMethod.GET, "/users/**", "/coaches/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/users/**", "/coaches/**").hasRole("ADMIN")
+                // Admin can manage users
+                .requestMatchers("/users/**").hasRole("ADMIN")
+                // Admin can manage (POST, PUT, DELETE) coaches
+                .requestMatchers(HttpMethod.POST, "/coaches/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/coaches/**").hasRole("ADMIN") // Assuming PUT for updates
+                .requestMatchers(HttpMethod.DELETE, "/coaches/**").hasRole("ADMIN") // Assuming DELETE for deletions
+                // Users and Admins can view coaches
+                .requestMatchers(HttpMethod.GET, "/coaches/**").hasAnyRole("ADMIN", "USER")
                 // Users and Admins can view teams and players
                 .requestMatchers(HttpMethod.GET, "/teams/**", "/players/**").hasAnyRole("ADMIN", "USER")
-                // Users and Admins can create/edit/delete their own data or managed data
+                // Users and Admins can create/edit/delete their own data or managed data for teams and players
                 .requestMatchers(HttpMethod.POST, "/teams/**", "/players/**").hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated()
         ).csrf(csrf -> csrf

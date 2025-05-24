@@ -29,6 +29,9 @@
                     <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
                         <a class="nav-link" th:href="@{/teams/}"><i class="bi bi-diagram-3"></i> Teams</a>
                     </li>
+                    <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+                        <a class="nav-link" th:href="@{/players/}"><i class="bi bi-person-standing"></i> Players</a>
+                    </li>
                 </ul>
                 <div class="d-flex align-items-center">
                     <div sec:authorize="isAuthenticated()">
@@ -86,26 +89,35 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script th:inline="javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            var deleteModalElement = document.getElementById('deleteConfirmModal');
-            if(deleteModalElement) {
-                var deleteModal = new bootstrap.Modal(deleteModalElement); // Initialize modal instance if not already
-                deleteModalElement.addEventListener('show.bs.modal', function (event) {
-                    var button = event.relatedTarget;
-                    var deleteUrl = button.getAttribute('data-delete-url');
-                    var itemName = button.getAttribute('data-item-name');
+    <div th:fragment="page_scripts">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            document.addEventListener('DOMContentLoaded', function () {
+                var deleteModalElement = document.getElementById('deleteConfirmModal');
+                if(deleteModalElement) {
+                    // Ensure Bootstrap Modal is loaded and initialized
+                    if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+                        var deleteModal = bootstrap.Modal.getOrCreateInstance(deleteModalElement);
+                        deleteModalElement.addEventListener('show.bs.modal', function (event) {
+                            var button = event.relatedTarget;
+                            var deleteUrl = button.getAttribute('data-delete-url');
+                            var itemName = button.getAttribute('data-item-name');
 
-                    var form = deleteModalElement.querySelector('#deleteForm');
-                    form.action = deleteUrl;
+                            var form = deleteModalElement.querySelector('#deleteForm');
+                            form.action = deleteUrl;
 
-                    var itemNameSpan = deleteModalElement.querySelector('#deleteItemName');
-                    itemNameSpan.textContent = itemName ? "'" + itemName + "'" : "this item";
-                });
-            }
-        });
-    </script>
+                            var itemNameSpan = deleteModalElement.querySelector('#deleteItemName');
+                            itemNameSpan.textContent = itemName ? "'" + itemName + "'" : "this item";
+                        });
+                    } else {
+                        console.error("Bootstrap Modal API not found. Make sure Bootstrap JS is loaded correctly.");
+                    }
+                }
+            });
+            /*]]>*/
+        </script>
+    </div>
 </body>
 </html>

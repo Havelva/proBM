@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{layout :: head(title=${title})}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+
+<div class="container mt-4 mb-5" th:fragment="content"> <!-- Added mb-5 for footer spacing -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="bi bi-person-lines-fill"></i> <span th:text="${title}">All Players</span></h1>
+        <!-- Optional: Add a button to create a new player directly from this page -->
+        <!-- This would require a new GET mapping in PlayerController for /players/new (without teamId) -->
+        <!-- and modification of players_form to select a team -->
+        <a th:href="@{/players/new_general}" class="btn btn-success" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+            <i class="bi bi-plus-circle-fill"></i> Add New Player
+        </a>
+    </div>
+
+    <div th:if="${#lists.isEmpty(players)}" class="alert alert-info shadow-sm">
+        <i class="bi bi-info-circle-fill"></i> No players found in the system. 
+        <span sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">Why not <a th:href="@{/players/new_general}" class="alert-link">add one</a>?</span>
+    </div>
+
+    <div th:if="${!#lists.isEmpty(players)}" class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+            <i class="bi bi-table"></i> Player Roster
+        </div>
+        <div class="card-body p-0"> <!-- p-0 to make table flush with card borders -->
+            <table class="table table-hover table-striped table-responsive-md mb-0"> <!-- mb-0 to remove bottom margin from table -->
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Jersey #</th>
+                    <th>Team</th>
+                    <th sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="player : ${players}" class="align-middle">
+                    <td th:text="${player.id}"></td>
+                    <td th:text="${player.name}"></td>
+                    <td th:text="${player.position != null ? player.position.fullName : 'N/A'}"></td>
+                    <td th:text="${player.jerseyNumber}"></td>
+                    <td>
+                        <a th:if="${player.team != null}" th:href="@{/teams/{id}(id=${player.team.id})}" 
+                           class="badge bg-info text-dark text-decoration-none" th:text="${player.team.name}">Team Name</a>
+                        <span th:if="${player.team == null}" class="badge bg-secondary">N/A</span>
+                    </td>
+                    <td sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" class="text-center">
+                        <a th:href="@{/players/{id}/edit(id=${player.id})}" class="btn btn-sm btn-outline-primary me-1" title="Edit Player">
+                            <i class="bi bi-pencil-square"></i> <span class="d-none d-md-inline">Edit</span>
+                        </a>
+                        <button type="button" class="btn btn-sm btn-outline-danger" title="Delete Player"
+                                data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
+                                th:attr="data-delete-url=@{/players/{id}/delete(id=${player.id})}, data-item-name=${player.name}">
+                            <i class="bi bi-trash"></i> <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{layout :: deleteModal}"></div>
+<footer th:replace="~{layout :: footer}"></footer>
+<div th:replace="~{layout :: page_scripts}"></div>
+
+</body>
+</html>

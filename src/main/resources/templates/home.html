@@ -33,7 +33,7 @@
                     <i class="bi bi-person-badge"></i>
                     <h3 class="mt-3 fs-5">Track Players</h3>
                     <p class="small">Manage player rosters, positions, skill levels, and stats.</p>
-                     <a class="btn btn-outline-primary mt-auto btn-sm" th:href="@{/teams/}" sec:authorize="isAuthenticated()">View Players</a>
+                     <a class="btn btn-outline-primary mt-auto btn-sm" th:href="@{/players/}" sec:authorize="isAuthenticated()">View Players</a>
                      <a class="btn btn-outline-secondary mt-auto btn-sm" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login to View</a>
                 </div>
             </div>
