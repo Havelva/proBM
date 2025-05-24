@@ -86,12 +86,15 @@ public class CoachController {
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteCoachConfirm(@PathVariable long id, RedirectAttributes redirectAttributes) {
+    public String deleteCoach(@PathVariable long id, RedirectAttributes redirectAttributes) {
         Coach coach = coachService.getCoach(id);
          if (coach != null) {
-            // Add logic here if coaches shouldn't be deleted if assigned to teams (or handle in DB with constraints/service layer)
-            coachService.deleteCoach(id);
-            redirectAttributes.addFlashAttribute("successMessage", "Coach '" + coach.getName() + "' deleted successfully!");
+            try {
+                coachService.deleteCoach(id);
+                redirectAttributes.addFlashAttribute("successMessage", "Coach '" + coach.getName() + "' deleted successfully!");
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Error deleting coach: " + e.getMessage());
+            }
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "Coach not found.");
         }

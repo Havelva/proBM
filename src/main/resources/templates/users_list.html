@@ -33,7 +33,7 @@
                                     data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
                                     th:attr="data-delete-url=@{'/users/' + ${user.id} + '/delete'}, data-item-name=${user.username}"
                                     th:disabled="${user.username == #authentication.name or #strings.toLowerCase(user.username) == 'admin'}">
-                                <i class="bi bi-trash"></i>
+                                <i class="bi bi-trash"></i> Delete
                             </button>
                         </td>
                     </tr>
@@ -46,5 +46,6 @@
     </div>
 </div>
 <div th:replace="~{layout :: deleteModal}"></div>
+<div th:replace="~{layout :: page_scripts}"></div>
 </body>
 </html>

@@ -99,30 +99,37 @@ public class UserController {
             return "users_form";
         }
 
-        boolean isNew = user.getId() == null;
-        userService.saveUser(user); // Password encoding is handled in service
-        redirectAttributes.addFlashAttribute("successMessage", "User '" + user.getUsername() + "' " + (isNew ? "created" : "updated") + " successfully!");
+        userService.saveUser(user);
+        redirectAttributes.addFlashAttribute("successMessage", "User '" + user.getUsername() + "' saved successfully.");
         return "redirect:/users/";
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteUserConfirm(@PathVariable long id, RedirectAttributes redirectAttributes) {
-        User user = userService.getUser(id);
-        if (user != null) {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if (authentication != null && user.getUsername().equals(authentication.getName())) {
-                redirectAttributes.addFlashAttribute("errorMessage", "You cannot delete your own account while logged in.");
-                return "redirect:/users/";
-            }
-            if ("admin".equalsIgnoreCase(user.getUsername())) { // Prevent deleting 'admin'
-                 redirectAttributes.addFlashAttribute("errorMessage", "The default 'admin' user cannot be deleted.");
-                return "redirect:/users/";
-            }
-            userService.deleteUser(id);
-            redirectAttributes.addFlashAttribute("successMessage", "User '" + user.getUsername() + "' deleted successfully!");
-        } else {
+    public String deleteUser(@PathVariable long id, RedirectAttributes redirectAttributes) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        User userToDelete = userService.getUser(id);
+
+        if (userToDelete == null) {
             redirectAttributes.addFlashAttribute("errorMessage", "User not found.");
+            return "redirect:/users/";
         }
-        return "redirect:/users/";
+
+        // Prevent deleting the currently logged-in user or the main 'admin' user
+        if (userToDelete.getUsername().equals(currentUsername) || "admin".equalsIgnoreCase(userToDelete.getUsername())) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Cannot delete the current user or the main admin user.");
+            return "redirect:/users/" + id; // Redirect back to the user's detail page
+        }
+
+        try {
+            userService.deleteUser(id); // Or coachService.deleteCoach(id), teamService.deleteTeam(id)
+            redirectAttributes.addFlashAttribute("successMessage", "User '" + userToDelete.getUsername() + "' deleted successfully.");
+        } catch (Exception e) {
+            // THIS IS THE CRITICAL PART NOW
+            redirectAttributes.addFlashAttribute("errorMessage", "Error deleting user: " + e.getMessage());
+            // For debugging, let's also print the stack trace to the server console
+            e.printStackTrace(); // ADD THIS LINE
+        }
+        return "redirect:/users/"; // Or /coaches/, /teams/
     }
 }

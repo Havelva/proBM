@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: cz.uhk.kpro2.Kpro2ApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 6.474 s <<< FAILURE! -- in cz.uhk.kpro2.Kpro2ApplicationTests
-cz.uhk.kpro2.Kpro2ApplicationTests.testTeamAndPlayerFullLifecycle -- Time elapsed: 0.148 s <<< FAILURE!
+Tests run: 6, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 6.506 s <<< FAILURE! -- in cz.uhk.kpro2.Kpro2ApplicationTests
+cz.uhk.kpro2.Kpro2ApplicationTests.testTeamAndPlayerFullLifecycle -- Time elapsed: 0.146 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: Team should have players ==> expected: <false> but was: <true>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -14,7 +14,7 @@ org.opentest4j.AssertionFailedError: Team should have players ==> expected: <fal
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 
-cz.uhk.kpro2.Kpro2ApplicationTests.testPasswordEncodingOnUserUpdate -- Time elapsed: 0.149 s <<< ERROR!
+cz.uhk.kpro2.Kpro2ApplicationTests.testPasswordEncodingOnUserUpdate -- Time elapsed: 0.150 s <<< ERROR!
 org.springframework.dao.DataIntegrityViolationException: 
 could not execute statement [Pro sloupec "PASSWORD" není hodnota NULL povolena
 NULL not allowed for column "PASSWORD"; SQL statement:
@@ -31,7 +31,7 @@ update users set password=?,roles=?,username=? where id=? [23502-232]] [update u
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
 	at jdk.proxy2/jdk.proxy2.$Proxy138.findByUsername(Unknown Source)
-	at cz.uhk.kpro2.service.UserServiceImpl.findByUsername(UserServiceImpl.java:59)
+	at cz.uhk.kpro2.service.UserServiceImpl.findByUsername(UserServiceImpl.java:76)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)

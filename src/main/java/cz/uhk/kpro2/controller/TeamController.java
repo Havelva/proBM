@@ -101,51 +101,38 @@ public class TeamController {
             return "teams_form";
         }
 
-        boolean isNew = team.getId() == null;
-
-        // Fetch coach
-        if (team.getCoach() != null && team.getCoach().getId() != null) {
-            Coach coach = coachService.getCoach(team.getCoach().getId());
-            team.setCoach(coach);
-        } else {
-            team.setCoach(null);
-        }
-
-        // Fetch members
+        // Handle members
+        List<User> members = new ArrayList<>();
         if (memberIds != null && !memberIds.isEmpty()) {
-            List<User> members = memberIds.stream()
-                .map(userService::getUser)
-                .filter(java.util.Objects::nonNull)
-                .collect(Collectors.toList());
-            team.setMembers(members);
-        } else {
-             team.setMembers(new ArrayList<>()); // Ensure it's an empty list not null
-        }
-
-        // Preserve players list if editing
-        if (!isNew) {
-            Team existingTeam = teamService.getTeam(team.getId());
-            if (existingTeam != null) {
-                team.setPlayers(existingTeam.getPlayers());
+            for (Long memberId : memberIds) {
+                User member = userService.getUser(memberId); // Assuming userService.getUser(id) exists and returns a User
+                if (member != null) {
+                    members.add(member);
+                }
             }
-        } else {
-            team.setPlayers(new ArrayList<>()); // Ensure new teams have an empty list
         }
+        team.setMembers(members); // Assuming Team class has a setMembers(List<User> members) method
 
-
-        Team savedTeam = teamService.saveTeam(team);
-        redirectAttributes.addFlashAttribute("successMessage", "Team '" + savedTeam.getName() + "' " + (isNew ? "created" : "updated") + " successfully!");
-        return "redirect:/teams/" + savedTeam.getId();
+        teamService.saveTeam(team); // Corrected call to match TeamService interface
+        redirectAttributes.addFlashAttribute("successMessage", "Team '" + team.getName() + "' saved successfully.");
+        return "redirect:/teams/";
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteTeamConfirm(@PathVariable long id, RedirectAttributes redirectAttributes) {
+    public String deleteTeam(@PathVariable long id, RedirectAttributes redirectAttributes) {
         Team team = teamService.getTeam(id);
         if (team != null) {
-            teamService.deleteTeam(id); // Cascade will remove players
-            redirectAttributes.addFlashAttribute("successMessage", "Team '" + team.getName() + "' deleted successfully!");
+            try {
+                // Consider any pre-deletion logic, e.g., disassociating players or checking if the team can be deleted.
+                // For now, directly deleting.
+                teamService.deleteTeam(id);
+                redirectAttributes.addFlashAttribute("successMessage", "Team '" + team.getName() + "' deleted successfully.");
+            } catch (Exception e) {
+                // Log the exception e.g., e.printStackTrace();
+                redirectAttributes.addFlashAttribute("errorMessage", "Error deleting team: " + e.getMessage());
+            }
         } else {
-             redirectAttributes.addFlashAttribute("errorMessage", "Could not find team to delete.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Team not found.");
         }
         return "redirect:/teams/";
     }

@@ -8,16 +8,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cz.uhk.kpro2.model.User;
 import cz.uhk.kpro2.repository.UserRepository;
+import cz.uhk.kpro2.repository.TeamRepository; // Add this import
+import cz.uhk.kpro2.model.Team; // Add this import
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final TeamRepository teamRepository; // Add this field
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, TeamRepository teamRepository) { // Add TeamRepository here
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.teamRepository = teamRepository; // Initialize here
     }
 
     @Override @Transactional(readOnly = true)
@@ -53,7 +57,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override @Transactional
-    public void deleteUser(long id) { userRepository.deleteById(id); }
+    public void deleteUser(long id) {
+        User userToDelete = userRepository.findById(id).orElse(null);
+        if (userToDelete != null) {
+            // Remove user from all teams they are a member of
+            List<Team> allTeams = teamRepository.findAll();
+            for (Team team : allTeams) {
+                if (team.getMembers().contains(userToDelete)) {
+                    team.getMembers().remove(userToDelete);
+                    teamRepository.save(team);
+                }
+            }
+            userRepository.deleteById(id);
+        }
+    }
 
     @Override @Transactional(readOnly = true)
     public User findByUsername(String username) { return userRepository.findByUsername(username); }

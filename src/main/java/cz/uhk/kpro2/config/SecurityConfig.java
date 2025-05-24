@@ -16,22 +16,25 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/register", "/login", "/css/**", "/js/**", "/home", "/", "/h2-console/**").permitAll()
-                // Admin can manage users
-                .requestMatchers("/users/**").hasRole("ADMIN")
-                // Admin can manage (POST, PUT, DELETE) coaches
-                .requestMatchers(HttpMethod.POST, "/coaches/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/coaches/**").hasRole("ADMIN") // Assuming PUT for updates
-                .requestMatchers(HttpMethod.DELETE, "/coaches/**").hasRole("ADMIN") // Assuming DELETE for deletions
-                // Users and Admins can view coaches
-                .requestMatchers(HttpMethod.GET, "/coaches/**").hasAnyRole("ADMIN", "USER")
-                // Users and Admins can view teams and players
-                .requestMatchers(HttpMethod.GET, "/teams/**", "/players/**").hasAnyRole("ADMIN", "USER")
-                // Users and Admins can create/edit/delete their own data or managed data for teams and players
-                .requestMatchers(HttpMethod.POST, "/teams/**", "/players/**").hasAnyRole("ADMIN", "USER")
+                // User management - Admin only for all operations
+                .requestMatchers("/users/**").hasRole("ADMIN") 
+                // Coach viewing - Admin and User
+                .requestMatchers(HttpMethod.GET, "/coaches", "/coaches/", "/coaches/{id}").hasAnyRole("ADMIN", "USER")
+                // Coach management (create, edit, delete) - Admin only
+                .requestMatchers(HttpMethod.GET, "/coaches/new", "/coaches/{id}/edit").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/coaches/save", "/coaches/{id}/delete").hasRole("ADMIN")
+                // Team and Player viewing - Admin and User
+                .requestMatchers(HttpMethod.GET, "/teams", "/teams/", "/teams/{id}", "/players", "/players/", "/players/{id}", "/players/team/{teamId}", "/players/overview").hasAnyRole("ADMIN", "USER")
+                // Team and Player management (create, edit, delete) - Admin and User
+                .requestMatchers(HttpMethod.GET, "/teams/new", "/teams/{id}/edit", "/players/new", "/players/new_general", "/players/{id}/edit").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.POST, "/teams/save", "/teams/{id}/delete", "/players/save", "/players/{id}/delete").hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated()
-        ).csrf(csrf -> csrf
+        )
+        // .csrf(csrf -> csrf.disable()) // CSRF was temporarily disabled
+        .csrf(csrf -> csrf
                 .ignoringRequestMatchers("/h2-console/**")
-        ).headers(headers -> headers
+        )
+        .headers(headers -> headers
             .frameOptions(frameOptions -> frameOptions.sameOrigin())
         ).formLogin(form -> form
                 .loginPage("/login")
