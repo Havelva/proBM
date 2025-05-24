@@ -13,14 +13,6 @@
                         <h3><i class="bi bi-box-arrow-in-right"></i> Member Login</h3>
                     </div>
                     <div class="card-body p-4">
-                        <div th:if="${param.error}" class="alert alert-danger d-flex align-items-center" role="alert">
-                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                            <div>Invalid username or password.</div>
-                        </div>
-                        <div th:if="${param.logout}" class="alert alert-success d-flex align-items-center" role="alert">
-                            <i class="bi bi-check-circle-fill me-2"></i>
-                            <div>You have been logged out.</div>
-                        </div>
                          <div th:if="${successMessage}" class="alert alert-success d-flex align-items-center" role="alert">
                             <i class="bi bi-check-circle-fill me-2"></i>
                             <div th:text="${successMessage}"></div>
