@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: cz.uhk.kpro2.Kpro2ApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 6.573 s <<< FAILURE! -- in cz.uhk.kpro2.Kpro2ApplicationTests
+Tests run: 6, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 6.839 s <<< FAILURE! -- in cz.uhk.kpro2.Kpro2ApplicationTests
 cz.uhk.kpro2.Kpro2ApplicationTests.testTeamAndPlayerFullLifecycle -- Time elapsed: 0.147 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: Team should have players ==> expected: <false> but was: <true>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
@@ -14,7 +14,7 @@ org.opentest4j.AssertionFailedError: Team should have players ==> expected: <fal
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 
-cz.uhk.kpro2.Kpro2ApplicationTests.testPasswordEncodingOnUserUpdate -- Time elapsed: 0.151 s <<< ERROR!
+cz.uhk.kpro2.Kpro2ApplicationTests.testPasswordEncodingOnUserUpdate -- Time elapsed: 0.150 s <<< ERROR!
 org.springframework.dao.DataIntegrityViolationException: 
 could not execute statement [Pro sloupec "PASSWORD" není hodnota NULL povolena
 NULL not allowed for column "PASSWORD"; SQL statement:

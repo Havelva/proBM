@@ -54,7 +54,12 @@ public class GameServiceImpl implements GameService {
     @Override
     @Transactional
     public void deleteGame(long id) {
-        gameRepository.deleteById(id);
+        Game game = gameRepository.findById(id).orElse(null);
+        if (game != null) {
+            gameRepository.delete(game);
+        }
+        // If game is null, it means it was already deleted or never existed.
+        // No error is thrown, and no action is taken.
     }
 
     @Override
