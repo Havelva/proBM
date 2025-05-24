@@ -1,75 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="cz.uhk.kpro2.Kpro2ApplicationTests" time="6.839" tests="6" errors="1" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="cz.uhk.kpro2.Kpro2ApplicationTests" time="3.661" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
-    <property name="sun.cpu.isalist" value="amd64"/>
-    <property name="sun.jnu.encoding" value="Cp1250"/>
-    <property name="java.class.path" value="C:\Users\venda\Desktop\PRO2pls\proBM\target\test-classes;C:\Users\venda\Desktop\PRO2pls\proBM\target\classes;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-thymeleaf\3.4.5\spring-boot-starter-thymeleaf-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter\3.4.5\spring-boot-starter-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.4.5\spring-boot-starter-logging-3.4.5.jar;C:\Users\venda\.m2\repository\ch\qos\logback\logback-classic\1.5.18\logback-classic-1.5.18.jar;C:\Users\venda\.m2\repository\ch\qos\logback\logback-core\1.5.18\logback-core-1.5.18.jar;C:\Users\venda\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\venda\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\venda\.m2\repository\org\slf4j\jul-to-slf4j\2.0.17\jul-to-slf4j-2.0.17.jar;C:\Users\venda\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\venda\.m2\repository\org\yaml\snakeyaml\2.3\snakeyaml-2.3.jar;C:\Users\venda\.m2\repository\org\thymeleaf\thymeleaf-spring6\3.1.3.RELEASE\thymeleaf-spring6-3.1.3.RELEASE.jar;C:\Users\venda\.m2\repository\org\thymeleaf\thymeleaf\3.1.3.RELEASE\thymeleaf-3.1.3.RELEASE.jar;C:\Users\venda\.m2\repository\org\attoparser\attoparser\2.0.7.RELEASE\attoparser-2.0.7.RELEASE.jar;C:\Users\venda\.m2\repository\org\unbescape\unbescape\1.1.6.RELEASE\unbescape-1.1.6.RELEASE.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.4.5\spring-boot-starter-web-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.4.5\spring-boot-starter-json-3.4.5.jar;C:\Users\venda\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.3\jackson-databind-2.18.3.jar;C:\Users\venda\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.3\jackson-annotations-2.18.3.jar;C:\Users\venda\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.3\jackson-core-2.18.3.jar;C:\Users\venda\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.18.3\jackson-datatype-jdk8-2.18.3.jar;C:\Users\venda\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.18.3\jackson-datatype-jsr310-2.18.3.jar;C:\Users\venda\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.18.3\jackson-module-parameter-names-2.18.3.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.4.5\spring-boot-starter-tomcat-3.4.5.jar;C:\Users\venda\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.40\tomcat-embed-core-10.1.40.jar;C:\Users\venda\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.40\tomcat-embed-websocket-10.1.40.jar;C:\Users\venda\.m2\repository\org\springframework\spring-web\6.2.6\spring-web-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-beans\6.2.6\spring-beans-6.2.6.jar;C:\Users\venda\.m2\repository\io\micrometer\micrometer-observation\1.14.6\micrometer-observation-1.14.6.jar;C:\Users\venda\.m2\repository\io\micrometer\micrometer-commons\1.14.6\micrometer-commons-1.14.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-webmvc\6.2.6\spring-webmvc-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-context\6.2.6\spring-context-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-expression\6.2.6\spring-expression-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.4.5\spring-boot-starter-data-jpa-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.4.5\spring-boot-starter-jdbc-3.4.5.jar;C:\Users\venda\.m2\repository\com\zaxxer\HikariCP\5.1.0\HikariCP-5.1.0.jar;C:\Users\venda\.m2\repository\org\springframework\spring-jdbc\6.2.6\spring-jdbc-6.2.6.jar;C:\Users\venda\.m2\repository\org\hibernate\orm\hibernate-core\6.6.13.Final\hibernate-core-6.6.13.Final.jar;C:\Users\venda\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\venda\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\venda\.m2\repository\org\jboss\logging\jboss-logging\3.6.1.Final\jboss-logging-3.6.1.Final.jar;C:\Users\venda\.m2\repository\org\hibernate\common\hibernate-commons-annotations\7.0.3.Final\hibernate-commons-annotations-7.0.3.Final.jar;C:\Users\venda\.m2\repository\io\smallrye\jandex\3.2.0\jandex-3.2.0.jar;C:\Users\venda\.m2\repository\com\fasterxml\classmate\1.7.0\classmate-1.7.0.jar;C:\Users\venda\.m2\repository\net\bytebuddy\byte-buddy\1.15.11\byte-buddy-1.15.11.jar;C:\Users\venda\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.5\jaxb-runtime-4.0.5.jar;C:\Users\venda\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.5\jaxb-core-4.0.5.jar;C:\Users\venda\.m2\repository\org\eclipse\angus\angus-activation\2.0.2\angus-activation-2.0.2.jar;C:\Users\venda\.m2\repository\org\glassfish\jaxb\txw2\4.0.5\txw2-4.0.5.jar;C:\Users\venda\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\venda\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\venda\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar;C:\Users\venda\.m2\repository\org\springframework\data\spring-data-jpa\3.4.5\spring-data-jpa-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\data\spring-data-commons\3.4.5\spring-data-commons-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\spring-orm\6.2.6\spring-orm-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-tx\6.2.6\spring-tx-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-aspects\6.2.6\spring-aspects-6.2.6.jar;C:\Users\venda\.m2\repository\org\aspectj\aspectjweaver\1.9.24\aspectjweaver-1.9.24.jar;C:\Users\venda\.m2\repository\com\h2database\h2\2.3.232\h2-2.3.232.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-security\3.4.5\spring-boot-starter-security-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\spring-aop\6.2.6\spring-aop-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\security\spring-security-config\6.4.5\spring-security-config-6.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\security\spring-security-core\6.4.5\spring-security-core-6.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\security\spring-security-crypto\6.4.5\spring-security-crypto-6.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\security\spring-security-web\6.4.5\spring-security-web-6.4.5.jar;C:\Users\venda\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-springsecurity6\3.1.3.RELEASE\thymeleaf-extras-springsecurity6-3.1.3.RELEASE.jar;C:\Users\venda\.m2\repository\org\slf4j\slf4j-api\2.0.17\slf4j-api-2.0.17.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.4.5\spring-boot-starter-validation-3.4.5.jar;C:\Users\venda\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.40\tomcat-embed-el-10.1.40.jar;C:\Users\venda\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.2.Final\hibernate-validator-8.0.2.Final.jar;C:\Users\venda\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-devtools\3.4.5\spring-boot-devtools-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot\3.4.5\spring-boot-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.4.5\spring-boot-autoconfigure-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.4.5\spring-boot-starter-test-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-test\3.4.5\spring-boot-test-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.4.5\spring-boot-test-autoconfigure-3.4.5.jar;C:\Users\venda\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\venda\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\venda\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\venda\.m2\repository\net\minidev\json-smart\2.5.2\json-smart-2.5.2.jar;C:\Users\venda\.m2\repository\net\minidev\accessors-smart\2.5.2\accessors-smart-2.5.2.jar;C:\Users\venda\.m2\repository\org\ow2\asm\asm\9.7.1\asm-9.7.1.jar;C:\Users\venda\.m2\repository\org\assertj\assertj-core\3.26.3\assertj-core-3.26.3.jar;C:\Users\venda\.m2\repository\org\awaitility\awaitility\4.2.2\awaitility-4.2.2.jar;C:\Users\venda\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\venda\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.4\junit-jupiter-5.11.4.jar;C:\Users\venda\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.4\junit-jupiter-api-5.11.4.jar;C:\Users\venda\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\venda\.m2\repository\org\junit\platform\junit-platform-commons\1.11.4\junit-platform-commons-1.11.4.jar;C:\Users\venda\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\venda\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.4\junit-jupiter-params-5.11.4.jar;C:\Users\venda\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.4\junit-jupiter-engine-5.11.4.jar;C:\Users\venda\.m2\repository\org\junit\platform\junit-platform-engine\1.11.4\junit-platform-engine-1.11.4.jar;C:\Users\venda\.m2\repository\org\mockito\mockito-core\5.14.2\mockito-core-5.14.2.jar;C:\Users\venda\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar;C:\Users\venda\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\venda\.m2\repository\org\mockito\mockito-junit-jupiter\5.14.2\mockito-junit-jupiter-5.14.2.jar;C:\Users\venda\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\venda\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\venda\.m2\repository\org\springframework\spring-core\6.2.6\spring-core-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-jcl\6.2.6\spring-jcl-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-test\6.2.6\spring-test-6.2.6.jar;C:\Users\venda\.m2\repository\org\xmlunit\xmlunit-core\2.10.0\xmlunit-core-2.10.0.jar;"/>
-    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/vaclavhavelka/Desktop/PRO2/proBM/target/test-classes:/Users/vaclavhavelka/Desktop/PRO2/proBM/target/classes:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-thymeleaf/3.4.5/spring-boot-starter-thymeleaf-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.5/spring-boot-starter-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.5/spring-boot-starter-logging-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/vaclavhavelka/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/vaclavhavelka/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/vaclavhavelka/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/vaclavhavelka/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/vaclavhavelka/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/vaclavhavelka/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/vaclavhavelka/.m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.3.RELEASE/thymeleaf-spring6-3.1.3.RELEASE.jar:/Users/vaclavhavelka/.m2/repository/org/thymeleaf/thymeleaf/3.1.3.RELEASE/thymeleaf-3.1.3.RELEASE.jar:/Users/vaclavhavelka/.m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar:/Users/vaclavhavelka/.m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.5/spring-boot-starter-web-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.5/spring-boot-starter-json-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.5/spring-boot-starter-tomcat-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.40/tomcat-embed-core-10.1.40.jar:/Users/vaclavhavelka/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.40/tomcat-embed-websocket-10.1.40.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-web/6.2.6/spring-web-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-beans/6.2.6/spring-beans-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/io/micrometer/micrometer-observation/1.14.6/micrometer-observation-1.14.6.jar:/Users/vaclavhavelka/.m2/repository/io/micrometer/micrometer-commons/1.14.6/micrometer-commons-1.14.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-webmvc/6.2.6/spring-webmvc-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-context/6.2.6/spring-context-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-expression/6.2.6/spring-expression-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.5/spring-boot-starter-data-jpa-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.5/spring-boot-starter-jdbc-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-jdbc/6.2.6/spring-jdbc-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/hibernate/orm/hibernate-core/6.6.13.Final/hibernate-core-6.6.13.Final.jar:/Users/vaclavhavelka/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/vaclavhavelka/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/vaclavhavelka/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/vaclavhavelka/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/vaclavhavelka/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/vaclavhavelka/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/vaclavhavelka/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/vaclavhavelka/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/vaclavhavelka/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/vaclavhavelka/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/vaclavhavelka/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/vaclavhavelka/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/vaclavhavelka/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/data/spring-data-jpa/3.4.5/spring-data-jpa-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/data/spring-data-commons/3.4.5/spring-data-commons-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-orm/6.2.6/spring-orm-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-tx/6.2.6/spring-tx-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-aspects/6.2.6/spring-aspects-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/aspectj/aspectjweaver/1.9.24/aspectjweaver-1.9.24.jar:/Users/vaclavhavelka/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.5/spring-boot-starter-security-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-aop/6.2.6/spring-aop-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/security/spring-security-config/6.4.5/spring-security-config-6.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/security/spring-security-core/6.4.5/spring-security-core-6.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/security/spring-security-crypto/6.4.5/spring-security-crypto-6.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/security/spring-security-web/6.4.5/spring-security-web-6.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/thymeleaf/extras/thymeleaf-extras-springsecurity6/3.1.3.RELEASE/thymeleaf-extras-springsecurity6-3.1.3.RELEASE.jar:/Users/vaclavhavelka/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.5/spring-boot-starter-validation-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.40/tomcat-embed-el-10.1.40.jar:/Users/vaclavhavelka/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/vaclavhavelka/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-devtools/3.4.5/spring-boot-devtools-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot/3.4.5/spring-boot-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.5/spring-boot-autoconfigure-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.5/spring-boot-starter-test-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-test/3.4.5/spring-boot-test-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.5/spring-boot-test-autoconfigure-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/vaclavhavelka/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/vaclavhavelka/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/vaclavhavelka/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/vaclavhavelka/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/vaclavhavelka/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/vaclavhavelka/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/vaclavhavelka/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/vaclavhavelka/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/vaclavhavelka/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/vaclavhavelka/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/vaclavhavelka/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/vaclavhavelka/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/vaclavhavelka/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/vaclavhavelka/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/vaclavhavelka/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/vaclavhavelka/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/vaclavhavelka/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/vaclavhavelka/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/vaclavhavelka/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/vaclavhavelka/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/vaclavhavelka/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/vaclavhavelka/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-core/6.2.6/spring-core-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-jcl/6.2.6/spring-jcl-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-test/6.2.6/spring-test-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="user.variant" value=""/>
-    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
     <property name="user.timezone" value="Europe/Prague"/>
     <property name="org.jboss.logging.provider" value="slf4j"/>
-    <property name="os.name" value="Windows 11"/>
+    <property name="os.name" value="Mac OS X"/>
     <property name="java.vm.specification.version" value="21"/>
     <property name="APPLICATION_NAME" value="BasketballManager"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CZ"/>
-    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\venda\AppData\Local\Temp\surefire17890405777255796221\surefirebooter-20250524192022735_3.jar C:\Users\venda\AppData\Local\Temp\surefire17890405777255796221 2025-05-24T19-20-22_625-jvmRun1 surefire-20250524192022735_1tmp surefire_0-20250524192022735_2tmp"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/vaclavhavelka/Desktop/PRO2/proBM/target/surefire/surefirebooter-20250524214938159_3.jar /Users/vaclavhavelka/Desktop/PRO2/proBM/target/surefire 2025-05-24T21-49-38_124-jvmRun1 surefire-20250524214938159_1tmp surefire_0-20250524214938159_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\venda\Desktop\PRO2pls\proBM\target\test-classes;C:\Users\venda\Desktop\PRO2pls\proBM\target\classes;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-thymeleaf\3.4.5\spring-boot-starter-thymeleaf-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter\3.4.5\spring-boot-starter-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.4.5\spring-boot-starter-logging-3.4.5.jar;C:\Users\venda\.m2\repository\ch\qos\logback\logback-classic\1.5.18\logback-classic-1.5.18.jar;C:\Users\venda\.m2\repository\ch\qos\logback\logback-core\1.5.18\logback-core-1.5.18.jar;C:\Users\venda\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\venda\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\venda\.m2\repository\org\slf4j\jul-to-slf4j\2.0.17\jul-to-slf4j-2.0.17.jar;C:\Users\venda\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\venda\.m2\repository\org\yaml\snakeyaml\2.3\snakeyaml-2.3.jar;C:\Users\venda\.m2\repository\org\thymeleaf\thymeleaf-spring6\3.1.3.RELEASE\thymeleaf-spring6-3.1.3.RELEASE.jar;C:\Users\venda\.m2\repository\org\thymeleaf\thymeleaf\3.1.3.RELEASE\thymeleaf-3.1.3.RELEASE.jar;C:\Users\venda\.m2\repository\org\attoparser\attoparser\2.0.7.RELEASE\attoparser-2.0.7.RELEASE.jar;C:\Users\venda\.m2\repository\org\unbescape\unbescape\1.1.6.RELEASE\unbescape-1.1.6.RELEASE.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.4.5\spring-boot-starter-web-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.4.5\spring-boot-starter-json-3.4.5.jar;C:\Users\venda\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.3\jackson-databind-2.18.3.jar;C:\Users\venda\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.3\jackson-annotations-2.18.3.jar;C:\Users\venda\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.3\jackson-core-2.18.3.jar;C:\Users\venda\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.18.3\jackson-datatype-jdk8-2.18.3.jar;C:\Users\venda\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.18.3\jackson-datatype-jsr310-2.18.3.jar;C:\Users\venda\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.18.3\jackson-module-parameter-names-2.18.3.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.4.5\spring-boot-starter-tomcat-3.4.5.jar;C:\Users\venda\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.40\tomcat-embed-core-10.1.40.jar;C:\Users\venda\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.40\tomcat-embed-websocket-10.1.40.jar;C:\Users\venda\.m2\repository\org\springframework\spring-web\6.2.6\spring-web-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-beans\6.2.6\spring-beans-6.2.6.jar;C:\Users\venda\.m2\repository\io\micrometer\micrometer-observation\1.14.6\micrometer-observation-1.14.6.jar;C:\Users\venda\.m2\repository\io\micrometer\micrometer-commons\1.14.6\micrometer-commons-1.14.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-webmvc\6.2.6\spring-webmvc-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-context\6.2.6\spring-context-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-expression\6.2.6\spring-expression-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.4.5\spring-boot-starter-data-jpa-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.4.5\spring-boot-starter-jdbc-3.4.5.jar;C:\Users\venda\.m2\repository\com\zaxxer\HikariCP\5.1.0\HikariCP-5.1.0.jar;C:\Users\venda\.m2\repository\org\springframework\spring-jdbc\6.2.6\spring-jdbc-6.2.6.jar;C:\Users\venda\.m2\repository\org\hibernate\orm\hibernate-core\6.6.13.Final\hibernate-core-6.6.13.Final.jar;C:\Users\venda\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\venda\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\venda\.m2\repository\org\jboss\logging\jboss-logging\3.6.1.Final\jboss-logging-3.6.1.Final.jar;C:\Users\venda\.m2\repository\org\hibernate\common\hibernate-commons-annotations\7.0.3.Final\hibernate-commons-annotations-7.0.3.Final.jar;C:\Users\venda\.m2\repository\io\smallrye\jandex\3.2.0\jandex-3.2.0.jar;C:\Users\venda\.m2\repository\com\fasterxml\classmate\1.7.0\classmate-1.7.0.jar;C:\Users\venda\.m2\repository\net\bytebuddy\byte-buddy\1.15.11\byte-buddy-1.15.11.jar;C:\Users\venda\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.5\jaxb-runtime-4.0.5.jar;C:\Users\venda\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.5\jaxb-core-4.0.5.jar;C:\Users\venda\.m2\repository\org\eclipse\angus\angus-activation\2.0.2\angus-activation-2.0.2.jar;C:\Users\venda\.m2\repository\org\glassfish\jaxb\txw2\4.0.5\txw2-4.0.5.jar;C:\Users\venda\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\venda\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\venda\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar;C:\Users\venda\.m2\repository\org\springframework\data\spring-data-jpa\3.4.5\spring-data-jpa-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\data\spring-data-commons\3.4.5\spring-data-commons-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\spring-orm\6.2.6\spring-orm-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-tx\6.2.6\spring-tx-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-aspects\6.2.6\spring-aspects-6.2.6.jar;C:\Users\venda\.m2\repository\org\aspectj\aspectjweaver\1.9.24\aspectjweaver-1.9.24.jar;C:\Users\venda\.m2\repository\com\h2database\h2\2.3.232\h2-2.3.232.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-security\3.4.5\spring-boot-starter-security-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\spring-aop\6.2.6\spring-aop-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\security\spring-security-config\6.4.5\spring-security-config-6.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\security\spring-security-core\6.4.5\spring-security-core-6.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\security\spring-security-crypto\6.4.5\spring-security-crypto-6.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\security\spring-security-web\6.4.5\spring-security-web-6.4.5.jar;C:\Users\venda\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-springsecurity6\3.1.3.RELEASE\thymeleaf-extras-springsecurity6-3.1.3.RELEASE.jar;C:\Users\venda\.m2\repository\org\slf4j\slf4j-api\2.0.17\slf4j-api-2.0.17.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.4.5\spring-boot-starter-validation-3.4.5.jar;C:\Users\venda\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.40\tomcat-embed-el-10.1.40.jar;C:\Users\venda\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.2.Final\hibernate-validator-8.0.2.Final.jar;C:\Users\venda\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-devtools\3.4.5\spring-boot-devtools-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot\3.4.5\spring-boot-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.4.5\spring-boot-autoconfigure-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.4.5\spring-boot-starter-test-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-test\3.4.5\spring-boot-test-3.4.5.jar;C:\Users\venda\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.4.5\spring-boot-test-autoconfigure-3.4.5.jar;C:\Users\venda\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\venda\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\venda\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\venda\.m2\repository\net\minidev\json-smart\2.5.2\json-smart-2.5.2.jar;C:\Users\venda\.m2\repository\net\minidev\accessors-smart\2.5.2\accessors-smart-2.5.2.jar;C:\Users\venda\.m2\repository\org\ow2\asm\asm\9.7.1\asm-9.7.1.jar;C:\Users\venda\.m2\repository\org\assertj\assertj-core\3.26.3\assertj-core-3.26.3.jar;C:\Users\venda\.m2\repository\org\awaitility\awaitility\4.2.2\awaitility-4.2.2.jar;C:\Users\venda\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\venda\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.4\junit-jupiter-5.11.4.jar;C:\Users\venda\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.4\junit-jupiter-api-5.11.4.jar;C:\Users\venda\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\venda\.m2\repository\org\junit\platform\junit-platform-commons\1.11.4\junit-platform-commons-1.11.4.jar;C:\Users\venda\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\venda\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.4\junit-jupiter-params-5.11.4.jar;C:\Users\venda\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.4\junit-jupiter-engine-5.11.4.jar;C:\Users\venda\.m2\repository\org\junit\platform\junit-platform-engine\1.11.4\junit-platform-engine-1.11.4.jar;C:\Users\venda\.m2\repository\org\mockito\mockito-core\5.14.2\mockito-core-5.14.2.jar;C:\Users\venda\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar;C:\Users\venda\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\venda\.m2\repository\org\mockito\mockito-junit-jupiter\5.14.2\mockito-junit-jupiter-5.14.2.jar;C:\Users\venda\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\venda\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\venda\.m2\repository\org\springframework\spring-core\6.2.6\spring-core-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-jcl\6.2.6\spring-jcl-6.2.6.jar;C:\Users\venda\.m2\repository\org\springframework\spring-test\6.2.6\spring-test-6.2.6.jar;C:\Users\venda\.m2\repository\org\xmlunit\xmlunit-core\2.10.0\xmlunit-core-2.10.0.jar;"/>
+    <property name="surefire.test.class.path" value="/Users/vaclavhavelka/Desktop/PRO2/proBM/target/test-classes:/Users/vaclavhavelka/Desktop/PRO2/proBM/target/classes:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-thymeleaf/3.4.5/spring-boot-starter-thymeleaf-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.5/spring-boot-starter-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.5/spring-boot-starter-logging-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/vaclavhavelka/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/vaclavhavelka/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/vaclavhavelka/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/vaclavhavelka/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/vaclavhavelka/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/vaclavhavelka/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/vaclavhavelka/.m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.3.RELEASE/thymeleaf-spring6-3.1.3.RELEASE.jar:/Users/vaclavhavelka/.m2/repository/org/thymeleaf/thymeleaf/3.1.3.RELEASE/thymeleaf-3.1.3.RELEASE.jar:/Users/vaclavhavelka/.m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar:/Users/vaclavhavelka/.m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.5/spring-boot-starter-web-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.5/spring-boot-starter-json-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.5/spring-boot-starter-tomcat-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.40/tomcat-embed-core-10.1.40.jar:/Users/vaclavhavelka/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.40/tomcat-embed-websocket-10.1.40.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-web/6.2.6/spring-web-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-beans/6.2.6/spring-beans-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/io/micrometer/micrometer-observation/1.14.6/micrometer-observation-1.14.6.jar:/Users/vaclavhavelka/.m2/repository/io/micrometer/micrometer-commons/1.14.6/micrometer-commons-1.14.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-webmvc/6.2.6/spring-webmvc-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-context/6.2.6/spring-context-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-expression/6.2.6/spring-expression-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.5/spring-boot-starter-data-jpa-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.5/spring-boot-starter-jdbc-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-jdbc/6.2.6/spring-jdbc-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/hibernate/orm/hibernate-core/6.6.13.Final/hibernate-core-6.6.13.Final.jar:/Users/vaclavhavelka/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/vaclavhavelka/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/vaclavhavelka/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/vaclavhavelka/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/vaclavhavelka/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/vaclavhavelka/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/vaclavhavelka/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/vaclavhavelka/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/vaclavhavelka/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/vaclavhavelka/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/vaclavhavelka/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/vaclavhavelka/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/vaclavhavelka/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/vaclavhavelka/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/data/spring-data-jpa/3.4.5/spring-data-jpa-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/data/spring-data-commons/3.4.5/spring-data-commons-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-orm/6.2.6/spring-orm-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-tx/6.2.6/spring-tx-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-aspects/6.2.6/spring-aspects-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/aspectj/aspectjweaver/1.9.24/aspectjweaver-1.9.24.jar:/Users/vaclavhavelka/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.5/spring-boot-starter-security-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-aop/6.2.6/spring-aop-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/security/spring-security-config/6.4.5/spring-security-config-6.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/security/spring-security-core/6.4.5/spring-security-core-6.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/security/spring-security-crypto/6.4.5/spring-security-crypto-6.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/security/spring-security-web/6.4.5/spring-security-web-6.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/thymeleaf/extras/thymeleaf-extras-springsecurity6/3.1.3.RELEASE/thymeleaf-extras-springsecurity6-3.1.3.RELEASE.jar:/Users/vaclavhavelka/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.5/spring-boot-starter-validation-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.40/tomcat-embed-el-10.1.40.jar:/Users/vaclavhavelka/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/vaclavhavelka/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-devtools/3.4.5/spring-boot-devtools-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot/3.4.5/spring-boot-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.5/spring-boot-autoconfigure-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.5/spring-boot-starter-test-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-test/3.4.5/spring-boot-test-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.5/spring-boot-test-autoconfigure-3.4.5.jar:/Users/vaclavhavelka/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/vaclavhavelka/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/vaclavhavelka/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/vaclavhavelka/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/vaclavhavelka/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/vaclavhavelka/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/vaclavhavelka/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/vaclavhavelka/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/vaclavhavelka/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/vaclavhavelka/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/vaclavhavelka/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/vaclavhavelka/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/vaclavhavelka/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/vaclavhavelka/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/vaclavhavelka/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/vaclavhavelka/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/vaclavhavelka/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/vaclavhavelka/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/vaclavhavelka/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/vaclavhavelka/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/vaclavhavelka/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/vaclavhavelka/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/vaclavhavelka/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-core/6.2.6/spring-core-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-jcl/6.2.6/spring-jcl-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/springframework/spring-test/6.2.6/spring-test-6.2.6.jar:/Users/vaclavhavelka/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="C:\Users\venda"/>
+    <property name="user.home" value="/Users/vaclavhavelka"/>
     <property name="user.language" value="cs"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.version.date" value="2025-01-21"/>
-    <property name="java.home" value="C:\Program Files\Java\jdk-21"/>
-    <property name="file.separator" value="\"/>
-    <property name="basedir" value="C:\Users\venda\Desktop\PRO2pls\proBM"/>
+    <property name="java.version.date" value="2024-01-16"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/vaclavhavelka/Desktop/PRO2/proBM"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\venda\AppData\Local\Temp\surefire17890405777255796221\surefirebooter-20250524192022735_3.jar"/>
-    <property name="user.script" value=""/>
+    <property name="apple.awt.application.name" value="ForkedBooter"/>
+    <property name="surefire.real.class.path" value="/Users/vaclavhavelka/Desktop/PRO2/proBM/target/surefire/surefirebooter-20250524214938159_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="java.runtime.version" value="21.0.6+8-LTS-188"/>
-    <property name="user.name" value="venda"/>
-    <property name="stdout.encoding" value="Cp1250"/>
-    <property name="path.separator" value=";"/>
-    <property name="os.version" value="10.0"/>
-    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="java.runtime.version" value="21.0.2+13-LTS"/>
+    <property name="user.name" value="vaclavhavelka"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="14.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
-    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="localRepository" value="C:\Users\venda\.m2\repository"/>
-    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
-    <property name="java.io.tmpdir" value="C:\Users\venda\AppData\Local\Temp\"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-21.0.2+13"/>
+    <property name="localRepository" value="/Users/vaclavhavelka/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/j8/5qln10bn7tz8szvzhph1lv9c0000gn/T/"/>
     <property name="com.zaxxer.hikari.pool_number" value="1"/>
-    <property name="java.version" value="21.0.6"/>
-    <property name="user.dir" value="C:\Users\venda\Desktop\PRO2pls\proBM"/>
-    <property name="os.arch" value="amd64"/>
+    <property name="java.version" value="21.0.2"/>
+    <property name="user.dir" value="/Users/vaclavhavelka/Desktop/PRO2/proBM"/>
+    <property name="os.arch" value="aarch64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="24516"/>
-    <property name="sun.os.patch.level" value=""/>
+    <property name="PID" value="6261"/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
-    <property name="native.encoding" value="Cp1250"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-21\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Users\venda\Downloads\apache-maven-3.9.9-bin\apache-maven-3.9.9\bin;C:\Users\venda\AppData\Local\Microsoft\WindowsApps;C:\Users\venda\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\venda\Downloads\apache-maven-3.9.9-bin;;c:\Users\venda\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;."/>
-    <property name="java.vm.info" value="mixed mode, sharing"/>
-    <property name="stderr.encoding" value="Cp1250"/>
-    <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="java.vm.version" value="21.0.6+8-LTS-188"/>
-    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/vaclavhavelka/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="21.0.2+13-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="java.class.version" value="65.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[BasketballManager] "/>
   </properties>
-  <testcase name="testUserCreationAndRetrieval" classname="cz.uhk.kpro2.Kpro2ApplicationTests" time="0.635">
-    <system-out><![CDATA[19:20:23.494 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [cz.uhk.kpro2.Kpro2ApplicationTests]: Kpro2ApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-19:20:23.615 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration cz.uhk.kpro2.Kpro2Application for test class cz.uhk.kpro2.Kpro2ApplicationTests
-19:20:23.769 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+  <testcase name="testUserCreationAndRetrieval" classname="cz.uhk.kpro2.Kpro2ApplicationTests" time="0.591">
+    <system-out><![CDATA[21:49:38.499 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [cz.uhk.kpro2.Kpro2ApplicationTests]: Kpro2ApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:49:38.542 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration cz.uhk.kpro2.Kpro2Application for test class cz.uhk.kpro2.Kpro2ApplicationTests
+21:49:38.593 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -80,19 +78,19 @@
 
  :: Spring Boot ::                (v3.4.5)
 
-2025-05-24T19:20:24.028+02:00  INFO 24516 --- [BasketballManager] [           main] cz.uhk.kpro2.Kpro2ApplicationTests       : Starting Kpro2ApplicationTests using Java 21.0.6 with PID 24516 (started by venda in C:\Users\venda\Desktop\PRO2pls\proBM)
-2025-05-24T19:20:24.030+02:00  INFO 24516 --- [BasketballManager] [           main] cz.uhk.kpro2.Kpro2ApplicationTests       : No active profile set, falling back to 1 default profile: "default"
-2025-05-24T19:20:24.872+02:00  INFO 24516 --- [BasketballManager] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-24T19:20:24.966+02:00  INFO 24516 --- [BasketballManager] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 80 ms. Found 5 JPA repository interfaces.
-2025-05-24T19:20:25.565+02:00  INFO 24516 --- [BasketballManager] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-24T19:20:25.617+02:00  INFO 24516 --- [BasketballManager] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
-2025-05-24T19:20:25.651+02:00  INFO 24516 --- [BasketballManager] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-05-24T19:20:25.973+02:00  INFO 24516 --- [BasketballManager] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-24T19:20:26.008+02:00  INFO 24516 --- [BasketballManager] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-05-24T19:20:26.168+02:00  INFO 24516 --- [BasketballManager] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:mydb user=SA
-2025-05-24T19:20:26.170+02:00  INFO 24516 --- [BasketballManager] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-05-24T19:20:26.192+02:00  WARN 24516 --- [BasketballManager] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-05-24T19:20:26.210+02:00  INFO 24516 --- [BasketballManager] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-05-24T21:49:38.696+02:00  INFO 6261 --- [BasketballManager] [           main] cz.uhk.kpro2.Kpro2ApplicationTests       : Starting Kpro2ApplicationTests using Java 21.0.2 with PID 6261 (started by vaclavhavelka in /Users/vaclavhavelka/Desktop/PRO2/proBM)
+2025-05-24T21:49:38.697+02:00  INFO 6261 --- [BasketballManager] [           main] cz.uhk.kpro2.Kpro2ApplicationTests       : No active profile set, falling back to 1 default profile: "default"
+2025-05-24T21:49:38.935+02:00  INFO 6261 --- [BasketballManager] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-24T21:49:38.960+02:00  INFO 6261 --- [BasketballManager] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 5 JPA repository interfaces.
+2025-05-24T21:49:39.151+02:00  INFO 6261 --- [BasketballManager] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-24T21:49:39.167+02:00  INFO 6261 --- [BasketballManager] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2025-05-24T21:49:39.178+02:00  INFO 6261 --- [BasketballManager] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-24T21:49:39.272+02:00  INFO 6261 --- [BasketballManager] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-24T21:49:39.282+02:00  INFO 6261 --- [BasketballManager] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-24T21:49:39.366+02:00  INFO 6261 --- [BasketballManager] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:mydb user=SA
+2025-05-24T21:49:39.367+02:00  INFO 6261 --- [BasketballManager] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-24T21:49:39.376+02:00  WARN 6261 --- [BasketballManager] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-24T21:49:39.384+02:00  INFO 6261 --- [BasketballManager] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 2.3.232
@@ -100,32 +98,32 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-05-24T19:20:27.088+02:00  INFO 24516 --- [BasketballManager] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-05-24T19:20:27.102+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.784+02:00  INFO 6261 --- [BasketballManager] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-24T21:49:39.789+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     drop table if exists coaches cascade 
 Hibernate: 
     drop table if exists coaches cascade 
-2025-05-24T19:20:27.106+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.791+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     drop table if exists games cascade 
 Hibernate: 
     drop table if exists games cascade 
-2025-05-24T19:20:27.106+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.791+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     drop table if exists players cascade 
 Hibernate: 
     drop table if exists players cascade 
-2025-05-24T19:20:27.106+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.791+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     drop table if exists team_members cascade 
 Hibernate: 
     drop table if exists team_members cascade 
-2025-05-24T19:20:27.107+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.791+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     drop table if exists teams cascade 
 Hibernate: 
     drop table if exists teams cascade 
-2025-05-24T19:20:27.107+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.791+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     drop table if exists users cascade 
 Hibernate: 
     drop table if exists users cascade 
-2025-05-24T19:20:27.111+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.793+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     create table coaches (
         experience_years integer not null check (experience_years>=0),
         id bigint generated by default as identity,
@@ -139,7 +137,7 @@ Hibernate:
         name varchar(100) not null,
         primary key (id)
     )
-2025-05-24T19:20:27.121+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.797+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     create table games (
         away_team_score integer,
         home_team_score integer,
@@ -163,7 +161,7 @@ Hibernate:
         location varchar(100),
         primary key (id)
     )
-2025-05-24T19:20:27.123+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.798+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     create table players (
         assists_per_game float(53) not null,
         blocks_per_game float(53) not null,
@@ -193,7 +191,7 @@ Hibernate:
         position enum ('CENTER','POINT_GUARD','POWER_FORWARD','SHOOTING_GUARD','SMALL_FORWARD') not null,
         primary key (id)
     )
-2025-05-24T19:20:27.124+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.799+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     create table team_members (
         member_id bigint not null,
         team_id bigint not null
@@ -203,7 +201,7 @@ Hibernate:
         member_id bigint not null,
         team_id bigint not null
     )
-2025-05-24T19:20:27.125+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.800+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     create table teams (
         coach_id bigint,
         id bigint generated by default as identity,
@@ -217,7 +215,7 @@ Hibernate:
         name varchar(100) not null,
         primary key (id)
     )
-2025-05-24T19:20:27.127+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.800+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     create table users (
         id bigint generated by default as identity,
         roles varchar(50) not null,
@@ -233,7 +231,7 @@ Hibernate:
         password varchar(100) not null,
         primary key (id)
     )
-2025-05-24T19:20:27.129+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.802+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     alter table if exists games 
        add constraint FKsxy8nadhptuk96oduoogs8p2c 
        foreign key (away_team_id) 
@@ -243,7 +241,7 @@ Hibernate:
        add constraint FKsxy8nadhptuk96oduoogs8p2c 
        foreign key (away_team_id) 
        references teams
-2025-05-24T19:20:27.138+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.805+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     alter table if exists games 
        add constraint FKm58kfr0wpwqw4gbyan1wt4ohc 
        foreign key (home_team_id) 
@@ -253,7 +251,7 @@ Hibernate:
        add constraint FKm58kfr0wpwqw4gbyan1wt4ohc 
        foreign key (home_team_id) 
        references teams
-2025-05-24T19:20:27.140+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.806+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     alter table if exists players 
        add constraint FK5nglidr00c4dyybl171v6kask 
        foreign key (team_id) 
@@ -263,7 +261,7 @@ Hibernate:
        add constraint FK5nglidr00c4dyybl171v6kask 
        foreign key (team_id) 
        references teams
-2025-05-24T19:20:27.141+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.807+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     alter table if exists team_members 
        add constraint FKidkfc3wlkfjao9k91pst8kidf 
        foreign key (member_id) 
@@ -273,7 +271,7 @@ Hibernate:
        add constraint FKidkfc3wlkfjao9k91pst8kidf 
        foreign key (member_id) 
        references users
-2025-05-24T19:20:27.142+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.807+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     alter table if exists team_members 
        add constraint FKtgca08el3ofisywcf11f0f76t 
        foreign key (team_id) 
@@ -283,7 +281,7 @@ Hibernate:
        add constraint FKtgca08el3ofisywcf11f0f76t 
        foreign key (team_id) 
        references teams
-2025-05-24T19:20:27.142+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.808+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     alter table if exists teams 
        add constraint FKip6gv8g69o6senngpocesacuk 
        foreign key (coach_id) 
@@ -293,12 +291,12 @@ Hibernate:
        add constraint FKip6gv8g69o6senngpocesacuk 
        foreign key (coach_id) 
        references coaches
-2025-05-24T19:20:27.146+02:00  INFO 24516 --- [BasketballManager] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-05-24T19:20:27.608+02:00  WARN 24516 --- [BasketballManager] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-05-24T19:20:27.644+02:00  INFO 24516 --- [BasketballManager] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2025-05-24T19:20:28.272+02:00  INFO 24516 --- [BasketballManager] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:mydb'
-2025-05-24T19:20:28.373+02:00  INFO 24516 --- [BasketballManager] [           main] cz.uhk.kpro2.Kpro2ApplicationTests       : Started Kpro2ApplicationTests in 4.614 seconds (process running for 5.534)
-2025-05-24T19:20:28.495+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:39.809+02:00  INFO 6261 --- [BasketballManager] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-24T21:49:39.994+02:00  WARN 6261 --- [BasketballManager] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-24T21:49:40.009+02:00  INFO 6261 --- [BasketballManager] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2025-05-24T21:49:40.243+02:00  INFO 6261 --- [BasketballManager] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:mydb'
+2025-05-24T21:49:40.280+02:00  INFO 6261 --- [BasketballManager] [           main] cz.uhk.kpro2.Kpro2ApplicationTests       : Started Kpro2ApplicationTests in 1.689 seconds (process running for 2.084)
+2025-05-24T21:49:40.319+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -319,7 +317,7 @@ Hibernate:
     where
         u1_0.username=?
 Initializing sample data...
-2025-05-24T19:20:28.628+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.428+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -333,7 +331,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:28.701+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.508+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -347,7 +345,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:28.764+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.585+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -361,7 +359,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:28.766+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.587+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         coaches
@@ -375,7 +373,7 @@ Hibernate:
         (experience_years, name, id) 
     values
         (?, ?, default)
-2025-05-24T19:20:28.767+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.587+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         coaches
@@ -389,7 +387,7 @@ Hibernate:
         (experience_years, name, id) 
     values
         (?, ?, default)
-2025-05-24T19:20:28.774+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.591+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         teams
@@ -403,7 +401,7 @@ Hibernate:
         (coach_id, name, id) 
     values
         (?, ?, default)
-2025-05-24T19:20:28.777+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.592+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         teams
@@ -417,7 +415,7 @@ Hibernate:
         (coach_id, name, id) 
     values
         (?, ?, default)
-2025-05-24T19:20:28.779+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.594+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         players
@@ -431,7 +429,7 @@ Hibernate:
         (assists_per_game, blocks_per_game, jersey_number, name, points_per_game, position, rebounds_per_game, skill_level, steals_per_game, team_id, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
-2025-05-24T19:20:28.781+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.595+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         players
@@ -445,7 +443,7 @@ Hibernate:
         (assists_per_game, blocks_per_game, jersey_number, name, points_per_game, position, rebounds_per_game, skill_level, steals_per_game, team_id, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
-2025-05-24T19:20:28.782+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.596+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         players
@@ -459,7 +457,7 @@ Hibernate:
         (assists_per_game, blocks_per_game, jersey_number, name, points_per_game, position, rebounds_per_game, skill_level, steals_per_game, team_id, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
-2025-05-24T19:20:28.783+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.596+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         players
@@ -474,7 +472,7 @@ Hibernate:
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 Sample data initialized successfully.
-2025-05-24T19:20:28.794+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.601+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         team_members
@@ -488,7 +486,7 @@ Hibernate:
         (team_id, member_id) 
     values
         (?, ?)
-2025-05-24T19:20:28.796+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.601+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         team_members
@@ -502,7 +500,7 @@ Hibernate:
         (team_id, member_id) 
     values
         (?, ?)
-2025-05-24T19:20:28.798+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.602+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         team_members
@@ -516,7 +514,7 @@ Hibernate:
         (team_id, member_id) 
     values
         (?, ?)
-2025-05-24T19:20:29.174+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.904+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -536,7 +534,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:29.237+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.977+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -550,7 +548,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:29.239+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:40.978+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -570,7 +568,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:29.302+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.049+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -584,7 +582,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:29.366+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.120+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -598,7 +596,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:29.433+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.192+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -620,14 +618,14 @@ Hibernate:
         u1_0.username=?
 ]]></system-out>
     <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
-WARNING: A Java agent has been loaded dynamically (C:\Users\venda\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar)
+WARNING: A Java agent has been loaded dynamically (/Users/vaclavhavelka/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
 WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
 ]]></system-err>
   </testcase>
-  <testcase name="testUsernameUniqueness" classname="cz.uhk.kpro2.Kpro2ApplicationTests" time="0.141">
-    <system-out><![CDATA[2025-05-24T19:20:29.452+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+  <testcase name="testUsernameUniqueness" classname="cz.uhk.kpro2.Kpro2ApplicationTests" time="0.149">
+    <system-out><![CDATA[2025-05-24T21:49:41.201+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -647,7 +645,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:29.515+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.273+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -661,7 +659,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:29.516+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.274+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -681,7 +679,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:29.578+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.344+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -695,7 +693,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:29.581+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.346+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -715,7 +713,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:29.583+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.347+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -735,7 +733,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:29.585+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.347+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -757,19 +755,8 @@ Hibernate:
         u1_0.username=?
 ]]></system-out>
   </testcase>
-  <testcase name="testTeamAndPlayerFullLifecycle" classname="cz.uhk.kpro2.Kpro2ApplicationTests" time="0.147">
-    <failure message="Team should have players ==&gt; expected: &lt;false&gt; but was: &lt;true&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Team should have players ==> expected: <false> but was: <true>
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
-	at org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
-	at org.junit.jupiter.api.Assertions.assertFalse(Assertions.java:239)
-	at cz.uhk.kpro2.Kpro2ApplicationTests.testTeamAndPlayerFullLifecycle(Kpro2ApplicationTests.java:150)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-]]></failure>
-    <system-out><![CDATA[2025-05-24T19:20:29.594+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+  <testcase name="testTeamAndPlayerFullLifecycle" classname="cz.uhk.kpro2.Kpro2ApplicationTests" time="0.166">
+    <system-out><![CDATA[2025-05-24T21:49:41.351+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -789,7 +776,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:29.657+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.430+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -803,7 +790,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:29.659+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.431+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -823,7 +810,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:29.721+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.501+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -837,7 +824,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:29.722+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.502+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         coaches
@@ -851,7 +838,7 @@ Hibernate:
         (experience_years, name, id) 
     values
         (?, ?, default)
-2025-05-24T19:20:29.723+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.502+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         teams
@@ -865,7 +852,7 @@ Hibernate:
         (coach_id, name, id) 
     values
         (?, ?, default)
-2025-05-24T19:20:29.724+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.503+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         players
@@ -879,10 +866,64 @@ Hibernate:
         (assists_per_game, blocks_per_game, jersey_number, name, points_per_game, position, rebounds_per_game, skill_level, steals_per_game, team_id, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-05-24T21:49:41.505+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+    insert 
+    into
+        team_members
+        (team_id, member_id) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        team_members
+        (team_id, member_id) 
+    values
+        (?, ?)
+2025-05-24T21:49:41.505+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+    select
+        p1_0.id,
+        p1_0.assists_per_game,
+        p1_0.blocks_per_game,
+        p1_0.jersey_number,
+        p1_0.name,
+        p1_0.points_per_game,
+        p1_0.position,
+        p1_0.rebounds_per_game,
+        p1_0.skill_level,
+        p1_0.steals_per_game,
+        p1_0.team_id 
+    from
+        players p1_0 
+    left join
+        teams t1_0 
+            on t1_0.id=p1_0.team_id 
+    where
+        t1_0.id=?
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.assists_per_game,
+        p1_0.blocks_per_game,
+        p1_0.jersey_number,
+        p1_0.name,
+        p1_0.points_per_game,
+        p1_0.position,
+        p1_0.rebounds_per_game,
+        p1_0.skill_level,
+        p1_0.steals_per_game,
+        p1_0.team_id 
+    from
+        players p1_0 
+    left join
+        teams t1_0 
+            on t1_0.id=p1_0.team_id 
+    where
+        t1_0.id=?
 ]]></system-out>
   </testcase>
-  <testcase name="testCoachCreationAndDeletion" classname="cz.uhk.kpro2.Kpro2ApplicationTests" time="0.153">
-    <system-out><![CDATA[2025-05-24T19:20:29.743+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+  <testcase name="testCoachCreationAndDeletion" classname="cz.uhk.kpro2.Kpro2ApplicationTests" time="0.149">
+    <system-out><![CDATA[2025-05-24T21:49:41.516+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -902,7 +943,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:29.806+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.586+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -916,7 +957,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:29.808+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.587+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -936,7 +977,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:29.871+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.657+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -950,7 +991,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:29.873+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.658+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         coaches
@@ -964,7 +1005,7 @@ Hibernate:
         (experience_years, name, id) 
     values
         (?, ?, default)
-2025-05-24T19:20:29.876+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.659+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         t1_0.id,
         t1_0.coach_id,
@@ -980,8 +1021,8 @@ Hibernate:
         teams t1_0
 ]]></system-out>
   </testcase>
-  <testcase name="contextLoads" classname="cz.uhk.kpro2.Kpro2ApplicationTests" time="0.133">
-    <system-out><![CDATA[2025-05-24T19:20:29.898+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+  <testcase name="contextLoads" classname="cz.uhk.kpro2.Kpro2ApplicationTests" time="0.144">
+    <system-out><![CDATA[2025-05-24T21:49:41.666+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -1001,7 +1042,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:29.960+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.736+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -1015,7 +1056,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:29.961+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.736+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -1035,7 +1076,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:30.023+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.806+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -1051,103 +1092,8 @@ Hibernate:
         (?, ?, ?, default)
 ]]></system-out>
   </testcase>
-  <testcase name="testPasswordEncodingOnUserUpdate" classname="cz.uhk.kpro2.Kpro2ApplicationTests" time="0.15">
-    <error message="could not execute statement [Pro sloupec &quot;PASSWORD&quot; není hodnota NULL povolena&#10;NULL not allowed for column &quot;PASSWORD&quot;; SQL statement:&#10;update users set password=?,roles=?,username=? where id=? [23502-232]] [update users set password=?,roles=?,username=? where id=?]; SQL [update users set password=?,roles=?,username=? where id=?]; constraint [null]" type="org.springframework.dao.DataIntegrityViolationException"><![CDATA[org.springframework.dao.DataIntegrityViolationException: 
-could not execute statement [Pro sloupec "PASSWORD" není hodnota NULL povolena
-NULL not allowed for column "PASSWORD"; SQL statement:
-update users set password=?,roles=?,username=? where id=? [23502-232]] [update users set password=?,roles=?,username=? where id=?]; SQL [update users set password=?,roles=?,username=? where id=?]; constraint [null]
-	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:294)
-	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:256)
-	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)
-	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
-	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)
-	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:136)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
-	at jdk.proxy2/jdk.proxy2.$Proxy139.findByUsername(Unknown Source)
-	at cz.uhk.kpro2.service.UserServiceImpl.findByUsername(UserServiceImpl.java:76)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
-	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
-	at cz.uhk.kpro2.service.UserServiceImpl$$SpringCGLIB$$0.findByUsername(<generated>)
-	at cz.uhk.kpro2.Kpro2ApplicationTests.testPasswordEncodingOnUserUpdate(Kpro2ApplicationTests.java:187)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Pro sloupec "PASSWORD" není hodnota NULL povolena
-NULL not allowed for column "PASSWORD"; SQL statement:
-update users set password=?,roles=?,username=? where id=? [23502-232]] [update users set password=?,roles=?,username=? where id=?]
-	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)
-	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
-	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197)
-	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:134)
-	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:55)
-	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55)
-	at org.hibernate.persister.entity.mutation.UpdateCoordinatorStandard.doStaticUpdate(UpdateCoordinatorStandard.java:781)
-	at org.hibernate.persister.entity.mutation.UpdateCoordinatorStandard.performUpdate(UpdateCoordinatorStandard.java:328)
-	at org.hibernate.persister.entity.mutation.UpdateCoordinatorStandard.update(UpdateCoordinatorStandard.java:245)
-	at org.hibernate.action.internal.EntityUpdateAction.execute(EntityUpdateAction.java:169)
-	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:644)
-	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:511)
-	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:414)
-	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoFlush(DefaultAutoFlushEventListener.java:67)
-	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
-	at org.hibernate.internal.SessionImpl.autoFlushIfRequired(SessionImpl.java:1379)
-	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:145)
-	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:442)
-	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:362)
-	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380)
-	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143)
-	at org.hibernate.query.spi.AbstractSelectionQuery.getSingleResult(AbstractSelectionQuery.java:275)
-	at org.springframework.data.jpa.repository.query.JpaQueryExecution$SingleEntityExecution.doExecute(JpaQueryExecution.java:224)
-	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:93)
-	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:152)
-	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:140)
-	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
-	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
-	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:170)
-	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
-	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
-	... 20 more
-Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Pro sloupec "PASSWORD" není hodnota NULL povolena
-NULL not allowed for column "PASSWORD"; SQL statement:
-update users set password=?,roles=?,username=? where id=? [23502-232]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
-	at org.h2.message.DbException.get(DbException.java:223)
-	at org.h2.message.DbException.get(DbException.java:199)
-	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:402)
-	at org.h2.table.Table.convertUpdateRow(Table.java:1005)
-	at org.h2.command.dml.SetClauseList.prepareUpdate(SetClauseList.java:149)
-	at org.h2.command.dml.Update.update(Update.java:82)
-	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
-	at org.h2.command.CommandContainer.update(CommandContainer.java:139)
-	at org.h2.command.Command.executeUpdate(Command.java:304)
-	at org.h2.command.Command.executeUpdate(Command.java:248)
-	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:213)
-	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:172)
-	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
-	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
-	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194)
-	... 54 more
-]]></error>
-    <system-out><![CDATA[2025-05-24T19:20:30.030+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+  <testcase name="testPasswordEncodingOnUserUpdate" classname="cz.uhk.kpro2.Kpro2ApplicationTests" time="0.286">
+    <system-out><![CDATA[2025-05-24T21:49:41.810+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -1167,7 +1113,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:30.092+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.881+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -1181,7 +1127,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:30.094+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.882+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -1201,7 +1147,7 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:30.156+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.951+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     insert 
     into
         users
@@ -1215,7 +1161,7 @@ Hibernate:
         (password, roles, username, id) 
     values
         (?, ?, ?, default)
-2025-05-24T19:20:30.158+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
+2025-05-24T21:49:41.953+02:00 DEBUG 6261 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
     select
         u1_0.id,
         u1_0.password,
@@ -1235,28 +1181,6 @@ Hibernate:
         users u1_0 
     where
         u1_0.username=?
-2025-05-24T19:20:30.165+02:00 DEBUG 24516 --- [BasketballManager] [           main] org.hibernate.SQL                        : 
-    update
-        users 
-    set
-        password=?,
-        roles=?,
-        username=? 
-    where
-        id=?
-Hibernate: 
-    update
-        users 
-    set
-        password=?,
-        roles=?,
-        username=? 
-    where
-        id=?
-2025-05-24T19:20:30.169+02:00  WARN 24516 --- [BasketballManager] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 23502, SQLState: 23502
-2025-05-24T19:20:30.169+02:00 ERROR 24516 --- [BasketballManager] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : Pro sloupec "PASSWORD" není hodnota NULL povolena
-NULL not allowed for column "PASSWORD"; SQL statement:
-update users set password=?,roles=?,username=? where id=? [23502-232]
 ]]></system-out>
   </testcase>
 </testsuite>

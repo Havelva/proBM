@@ -1,4 +1,5 @@
 package cz.uhk.kpro2.service;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,20 +9,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cz.uhk.kpro2.model.User;
 import cz.uhk.kpro2.repository.UserRepository;
-import cz.uhk.kpro2.repository.TeamRepository; // Add this import
-import cz.uhk.kpro2.model.Team; // Add this import
+import cz.uhk.kpro2.repository.TeamRepository;
+import cz.uhk.kpro2.model.Team;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final TeamRepository teamRepository; // Add this field
+    private final TeamRepository teamRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, TeamRepository teamRepository) { // Add TeamRepository here
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, TeamRepository teamRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.teamRepository = teamRepository; // Initialize here
+        this.teamRepository = teamRepository;
     }
 
     @Override @Transactional(readOnly = true)
@@ -32,35 +33,38 @@ public class UserServiceImpl implements UserService {
 
     @Override @Transactional
     public User saveUser(User user) {
-        // Handle password encoding for new users or if password is changed
         if (user.getId() == null) { // New user
             if (user.getPassword() == null || user.getPassword().isEmpty()) {
-                // This should be caught by validation, but as a fallback
                 throw new IllegalArgumentException("Password cannot be empty for a new user.");
             }
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-        } else { // Existing user
-            if (user.getPassword() != null && !user.getPassword().isEmpty()) {
-                // Password field was filled, so encode the new password
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-            } else {
-                // Password field was empty, keep the existing password
-                User existingUser = userRepository.findById(user.getId())
-                                      .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + user.getId() + " for password retention."));
-                user.setPassword(existingUser.getPassword());
+            if (user.getRoles() == null || user.getRoles().isEmpty()) {
+                user.setRoles("ROLE_USER"); // Default role if not specified
             }
+            return userRepository.save(user);
+        } else { // Existing user
+            User existingUser = userRepository.findById(user.getId())
+                                  .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + user.getId()));
+
+            // Update fields from 'user' onto 'existingUser'
+            existingUser.setUsername(user.getUsername());
+            existingUser.setRoles(user.getRoles());
+
+            // Only update password if a new one is provided and not empty
+            if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+                existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            }
+            // If user.getPassword() is null or empty, existingUser's password remains unchanged.
+
+            return userRepository.save(existingUser); // Save the merged entity
         }
-        if (user.getRoles() == null || user.getRoles().isEmpty()) {
-            user.setRoles("ROLE_USER"); // Default role if not specified
-        }
-        return userRepository.save(user);
     }
+
 
     @Override @Transactional
     public void deleteUser(long id) {
         User userToDelete = userRepository.findById(id).orElse(null);
         if (userToDelete != null) {
-            // Remove user from all teams they are a member of
             List<Team> allTeams = teamRepository.findAll();
             for (Team team : allTeams) {
                 if (team.getMembers().contains(userToDelete)) {
@@ -79,9 +83,8 @@ public class UserServiceImpl implements UserService {
     public boolean isUsernameUnique(String username, Long userId) {
         User existingUser = userRepository.findByUsername(username);
         if (existingUser == null) {
-            return true; // Username is not taken
+            return true;
         }
-        // If username is taken, check if it belongs to the current user being edited
         return userId != null && existingUser.getId().equals(userId);
     }
 }

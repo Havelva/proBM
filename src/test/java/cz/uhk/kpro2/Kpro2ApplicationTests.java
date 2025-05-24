@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List; // Import List
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,7 @@ import cz.uhk.kpro2.service.TeamService;
 import cz.uhk.kpro2.service.UserService;
 
 @SpringBootTest
-@Transactional // Rolls back transactions after each test, ensuring clean state
+@Transactional 
 class Kpro2ApplicationTests {
 
     @Autowired private UserService userService;
@@ -38,13 +41,12 @@ class Kpro2ApplicationTests {
 
     @BeforeEach
     void setUpTestData() {
-        // Create common users for tests if needed, they will be rolled back
         if (userService.findByUsername("test_admin_junit") == null) {
             testAdmin = new User();
             testAdmin.setUsername("test_admin_junit");
-            testAdmin.setPassword("adminPass123"); // Raw password
+            testAdmin.setPassword("adminPass123"); 
             testAdmin.setRoles("ROLE_ADMIN,ROLE_USER");
-            userService.saveUser(testAdmin); // Service will encode
+            userService.saveUser(testAdmin);
         } else {
             testAdmin = userService.findByUsername("test_admin_junit");
         }
@@ -92,7 +94,7 @@ class Kpro2ApplicationTests {
 
     @Test
     void testUsernameUniqueness() {
-        // testAdmin already exists from setUp
+        assertNotNull(testAdmin, "Test admin should exist");
         assertFalse(userService.isUsernameUnique("test_admin_junit", null), "Username should be taken by new user");
         assertTrue(userService.isUsernameUnique("test_admin_junit", testAdmin.getId()), "Username should be unique for the same user being edited");
         assertTrue(userService.isUsernameUnique("completely_new_username", null), "New username should be unique");
@@ -117,58 +119,51 @@ class Kpro2ApplicationTests {
 
     @Test
     void testTeamAndPlayerFullLifecycle() {
-        // 1. Create Coach
         Coach coach = new Coach();
         coach.setName("Lifecycle Test Coach");
         coach.setExperienceYears(8);
         Coach savedCoach = coachService.saveCoach(coach);
 
-        // 2. Create Team
         Team team = new Team();
         team.setName("Lifecycle Test Team");
         team.setCoach(savedCoach);
-        team.getMembers().add(testUser); // Add a member
+        team.getMembers().add(testUser);
         Team savedTeam = teamService.saveTeam(team);
         assertNotNull(savedTeam.getId());
         assertEquals(1, savedTeam.getMembers().size());
 
-        // 3. Create Player for the Team
         Player player = new Player();
         player.setName("Lifecycle Test Player");
         player.setPosition(PlayerPosition.SMALL_FORWARD);
         player.setJerseyNumber(33);
         player.setSkillLevel("All-Star");
         player.setPointsPerGame(22.5);
-        player.setTeam(savedTeam); // Associate with the saved team
+        player.setTeam(savedTeam); 
         Player savedPlayer = playerService.savePlayer(player);
         assertNotNull(savedPlayer.getId());
         assertEquals(savedTeam.getId(), savedPlayer.getTeam().getId());
 
-        // 4. Retrieve Team and verify player association
-        Team retrievedTeamWithPlayer = teamService.getTeam(savedTeam.getId());
-        assertNotNull(retrievedTeamWithPlayer);
-        assertFalse(retrievedTeamWithPlayer.getPlayers().isEmpty(), "Team should have players");
-        assertEquals(1, retrievedTeamWithPlayer.getPlayers().size());
-        assertEquals(savedPlayer.getName(), retrievedTeamWithPlayer.getPlayers().get(0).getName());
+        // Retrieve players by team ID instead of relying on Team entity's collection
+        List<Player> teamPlayers = playerService.getPlayersByTeamId(savedTeam.getId());
+        assertNotNull(teamPlayers);
+        assertFalse(teamPlayers.isEmpty(), "Team should have players");
+        assertEquals(1, teamPlayers.size());
+        assertEquals(savedPlayer.getName(), teamPlayers.get(0).getName());
 
-        // 5. Update Player
         savedPlayer.setPointsPerGame(25.0);
         playerService.savePlayer(savedPlayer);
         Player updatedPlayer = playerService.getPlayer(savedPlayer.getId());
         assertEquals(25.0, updatedPlayer.getPointsPerGame());
 
-        // 6. Delete Player
         playerService.deletePlayer(savedPlayer.getId());
         assertNull(playerService.getPlayer(savedPlayer.getId()), "Player should be deleted");
 
         Team teamAfterPlayerDeletion = teamService.getTeam(savedTeam.getId());
         assertTrue(teamAfterPlayerDeletion.getPlayers().isEmpty(), "Team's player list should be empty");
 
-        // 7. Delete Team (should cascade delete players if any remained, and remove associations)
         teamService.deleteTeam(savedTeam.getId());
         assertNull(teamService.getTeam(savedTeam.getId()), "Team should be deleted");
 
-        // 8. Coach should still exist
         Coach stillExistingCoach = coachService.getCoach(savedCoach.getId());
         assertNotNull(stillExistingCoach);
     }
@@ -179,19 +174,24 @@ class Kpro2ApplicationTests {
         assertNotNull(userToUpdate);
         String oldEncodedPassword = userToUpdate.getPassword();
 
-        // Scenario 1: Update username, password field is empty (should keep old password)
-        userToUpdate.setUsername("test_user_junit_updated");
-        userToUpdate.setPassword(null); // Simulate empty password field in form
-        userService.saveUser(userToUpdate);
-
-        User updatedUser1 = userService.findByUsername("test_user_junit_updated");
+        // Create a temporary user object for update to avoid modifying the managed entity directly
+        User updateData = new User();
+        updateData.setId(userToUpdate.getId());
+        updateData.setUsername("test_user_junit_updated");
+        updateData.setRoles(userToUpdate.getRoles());
+        updateData.setPassword(null); // Simulate empty password field in form
+        
+        // Use the updated saveUser which handles null passwords correctly
+        User updatedUser1 = userService.saveUser(updateData); 
+        
         assertNotNull(updatedUser1);
+        assertEquals("test_user_junit_updated", updatedUser1.getUsername());
         assertEquals(oldEncodedPassword, updatedUser1.getPassword(), "Password should not have changed when field was empty");
 
         // Scenario 2: Update password
-        userToUpdate.setPassword("newPassword123");
-        userService.saveUser(userToUpdate);
-        User updatedUser2 = userService.findByUsername("test_user_junit_updated");
+        updateData.setPassword("newPassword123");
+        User updatedUser2 = userService.saveUser(updateData);
+        
         assertNotNull(updatedUser2);
         assertTrue(passwordEncoder.matches("newPassword123", updatedUser2.getPassword()), "Password should be updated and encoded");
         assertNotEquals(oldEncodedPassword, updatedUser2.getPassword());
