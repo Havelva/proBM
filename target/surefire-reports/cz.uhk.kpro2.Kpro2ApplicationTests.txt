@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: cz.uhk.kpro2.Kpro2ApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.661 s -- in cz.uhk.kpro2.Kpro2ApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.059 s -- in cz.uhk.kpro2.Kpro2ApplicationTests

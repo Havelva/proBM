@@ -1,1 +1,7 @@
-cz/uhk/kpro2/Kpro2ApplicationTests.class
+cz\uhk\kpro2\service\GameServiceImplTest.class
+cz\uhk\kpro2\service\CoachServiceImplTest.class
+cz\uhk\kpro2\service\UserDetailsServiceImplTest.class
+cz\uhk\kpro2\service\UserServiceImplTest.class
+cz\uhk\kpro2\service\PlayerServiceImplTest.class
+cz\uhk\kpro2\Kpro2ApplicationTests.class
+cz\uhk\kpro2\service\TeamServiceImplTest.class
