@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,7 @@ class TeamServiceImplTest {
 
     private Team team1;
     private Team team2;
+    private Team team3_for_standings_edge_case;
     private Coach coach1;
 
     @BeforeEach // Ensure @BeforeEach is present
@@ -50,6 +52,10 @@ class TeamServiceImplTest {
         team2 = new Team();
         team2.setId(2L);
         team2.setName("Team Beta");
+        
+        team3_for_standings_edge_case = new Team();
+        team3_for_standings_edge_case.setId(3L);
+        team3_for_standings_edge_case.setName("Team Charlie (No Games)");
     }
 
     @Test
@@ -137,7 +143,7 @@ class TeamServiceImplTest {
     @Test
     void testGetTeamStandings() {
         // Prepare mock teams
-        when(teamRepository.findAll()).thenReturn(Arrays.asList(team1, team2));
+        when(teamRepository.findAll()).thenReturn(Arrays.asList(team1, team2, team3_for_standings_edge_case));
 
         // Prepare mock games
         Game game1_2 = new Game(); // Team1 (Home) vs Team2 (Away)
@@ -169,12 +175,24 @@ class TeamServiceImplTest {
         game_no_score.setPlayed(true); // Played but no scores
         // game_no_score.setHomeTeamScore(null); // Scores are null by default
 
-        when(gameService.getPlayedGames()).thenReturn(Arrays.asList(game1_2, game2_1, game_no_score));
+        // Game with a team not in allTeams (e.g., a deleted team)
+        Team deletedTeam = new Team();
+        deletedTeam.setId(99L);
+        deletedTeam.setName("Deleted Team");
+        Game game_with_deleted_team = new Game();
+        game_with_deleted_team.setId(5L);
+        game_with_deleted_team.setHomeTeam(team1);
+        game_with_deleted_team.setAwayTeam(deletedTeam); // Away team is the deleted one
+        game_with_deleted_team.setHomeTeamScore(10);
+        game_with_deleted_team.setAwayTeamScore(5);
+        game_with_deleted_team.setPlayed(true);
+
+        when(gameService.getPlayedGames()).thenReturn(Arrays.asList(game1_2, game2_1, game_no_score, game_with_deleted_team));
 
         List<TeamStandingDto> standings = teamService.getTeamStandings();
 
         assertNotNull(standings);
-        assertEquals(2, standings.size(), "Should be two teams in standings");
+        assertEquals(3, standings.size(), "Should be three teams in standings");
 
         // Team1: 1 win, 1 loss
         // Team2: 1 win, 1 loss
@@ -183,12 +201,13 @@ class TeamServiceImplTest {
 
         TeamStandingDto standingTeam1 = standings.stream().filter(s -> s.getTeam().getName().equals("Team Alpha")).findFirst().orElse(null);
         TeamStandingDto standingTeam2 = standings.stream().filter(s -> s.getTeam().getName().equals("Team Beta")).findFirst().orElse(null);
+        TeamStandingDto standingTeam3 = standings.stream().filter(s -> s.getTeam().getName().equals("Team Charlie (No Games)")).findFirst().orElse(null);
 
         assertNotNull(standingTeam1, "Standing for Team Alpha not found");
         assertEquals("Team Alpha", standingTeam1.getTeam().getName());
         assertEquals(1, standingTeam1.getWins());
         assertEquals(1, standingTeam1.getLosses());
-        assertEquals(2, standingTeam1.getGamesPlayed()); // game1_2, game2_1 (game_no_score is skipped for win/loss)
+        assertEquals(2, standingTeam1.getGamesPlayed()); // game1_2, game2_1 (game_no_score is skipped for win/loss, game_with_deleted_team home part counts)
         // Points are not part of TeamStandingDto in the provided service impl, but win percentage is.
         // assertEquals(0.5, standingTeam1.getWinPercentage(), 0.001);
 
@@ -200,11 +219,51 @@ class TeamServiceImplTest {
         assertEquals(2, standingTeam2.getGamesPlayed());
         // assertEquals(0.5, standingTeam2.getWinPercentage(), 0.001);
         
+        assertNotNull(standingTeam3, "Standing for Team Charlie not found");
+        assertEquals("Team Charlie (No Games)", standingTeam3.getTeam().getName());
+        assertEquals(0, standingTeam3.getWins());
+        assertEquals(0, standingTeam3.getLosses());
+        assertEquals(0, standingTeam3.getGamesPlayed());
+
         // Check order (Team Alpha should be before Team Beta due to name sorting as wins/losses are equal)
+        // Team Charlie should be last as it has 0 wins/losses
         assertTrue(standings.indexOf(standingTeam1) < standings.indexOf(standingTeam2), "Team Alpha should be ranked higher or equal (due to name) than Team Beta");
+        assertTrue(standings.indexOf(standingTeam2) < standings.indexOf(standingTeam3), "Team Beta should be ranked higher than Team Charlie");
 
 
         verify(teamRepository, times(1)).findAll();
         verify(gameService, times(1)).getPlayedGames();
+    }
+    
+    @Test
+    void testGetTeamStandings_noPlayedGames() {
+        when(teamRepository.findAll()).thenReturn(Arrays.asList(team1, team2));
+        when(gameService.getPlayedGames()).thenReturn(Collections.emptyList());
+
+        List<TeamStandingDto> standings = teamService.getTeamStandings();
+
+        assertNotNull(standings);
+        assertEquals(2, standings.size());
+        for (TeamStandingDto standing : standings) {
+            assertEquals(0, standing.getWins());
+            assertEquals(0, standing.getLosses());
+            assertEquals(0, standing.getGamesPlayed());
+        }
+        verify(teamRepository, times(1)).findAll();
+        verify(gameService, times(1)).getPlayedGames();
+    }
+
+    @Test
+    void testGetTeamStandings_noTeams() {
+        when(teamRepository.findAll()).thenReturn(Collections.emptyList());
+        when(gameService.getPlayedGames()).thenReturn(Collections.emptyList()); // Or some games, it shouldn't matter
+
+        List<TeamStandingDto> standings = teamService.getTeamStandings();
+
+        assertNotNull(standings);
+        assertTrue(standings.isEmpty());
+        verify(teamRepository, times(1)).findAll();
+        // getPlayedGames might or might not be called depending on implementation if no teams, let's assume it is for now
+        verify(gameService, times(1)).getPlayedGames(); 
     }
 }
