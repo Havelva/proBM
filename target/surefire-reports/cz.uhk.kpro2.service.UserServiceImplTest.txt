@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: cz.uhk.kpro2.service.UserServiceImplTest
 -------------------------------------------------------------------------------
-Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.552 s -- in cz.uhk.kpro2.service.UserServiceImplTest
+Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.627 s -- in cz.uhk.kpro2.service.UserServiceImplTest

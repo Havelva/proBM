@@ -124,6 +124,14 @@ public class TeamController {
         }
         team.setMembers(members);
 
+        // Preserve existing players when updating a team
+        if (team.getId() != null) { // This is an update
+            Team persistentTeam = teamService.getTeam(team.getId());
+            if (persistentTeam != null) {
+                team.setPlayers(persistentTeam.getPlayers()); // Preserve the existing players
+            }
+        }
+
         teamService.saveTeam(team);
         redirectAttributes.addFlashAttribute("successMessage", "Team '" + team.getName() + "' saved successfully.");
         return "redirect:/teams/";
